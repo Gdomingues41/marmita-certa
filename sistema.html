@@ -629,107 +629,36 @@
     <!-- ================================================================================= -->
     <script>
 // =================================================================================
+        // ÁUDIOS REAIS CARREGADOS DIRETO DO REPOSITÓRIO (MP3)
         // =================================================================================
-        // SÍNTESE FIEL DOS SONS REAIS (GESTOR RESTAURANTE & MOTOBOY)
-        // =================================================================================
-        let audioCtx = null;
+        const audioPedido = new Audio('alerta_pedido.mp3');
+        const audioMotoboy = new Audio('notificacao_entrega.mp3');
 
-        function getAudioContext() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            return audioCtx;
-        }
-
-        // Desbloqueia no primeiro clique/toque
-        document.addEventListener('click', () => { getAudioContext(); }, { once: true });
-        document.addEventListener('touchstart', () => { getAudioContext(); }, { once: true });
+        // Pré-carregamento dos arquivos de áudio
+        audioPedido.load();
+        audioMotoboy.load();
 
         function tocarAlertaSonoro(tipo = 'pedido') {
             try {
-                const ctx = getAudioContext();
-                if (!ctx) return;
-
-                if (ctx.state === 'suspended') {
-                    ctx.resume().then(() => {
-                        executarSom(tipo, ctx);
-                    });
-                } else {
-                    executarSom(tipo, ctx);
+                if (tipo === 'pedido') {
+                    audioPedido.currentTime = 0;
+                    const playPromise = audioPedido.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(err => {
+                            console.warn("Autoplay bloqueado aguardando interação do usuário:", err);
+                        });
+                    }
+                } else if (tipo === 'motoboy') {
+                    audioMotoboy.currentTime = 0;
+                    const playPromise = audioMotoboy.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(err => {
+                            console.warn("Autoplay bloqueado aguardando interação do usuário:", err);
+                        });
+                    }
                 }
             } catch (err) {
-                console.error("Erro ao tocar áudio:", err);
-            }
-        }
-
-        function executarSom(tipo, ctx) {
-            const t0 = ctx.currentTime;
-
-            if (tipo === 'pedido') {
-                // 🔔 SOM 1: SINETAS / CAMPAINHA DO GESTOR DE RESTAURANTE
-                // Toca a sequência rápida de 2 sinetas com ressonância metálica
-                function tocarDuplaSineta(startTime) {
-                    // Nota 1 (Aguda clara)
-                    const osc1 = ctx.createOscillator();
-                    const gain1 = ctx.createGain();
-                    osc1.type = 'sine';
-                    osc1.frequency.setValueAtTime(1760, startTime); // A6
-                    gain1.gain.setValueAtTime(0.5, startTime);
-                    gain1.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.35);
-                    osc1.connect(gain1);
-                    gain1.connect(ctx.destination);
-                    osc1.start(startTime);
-                    osc1.stop(startTime + 0.35);
-
-                    // Nota 2 (Levemente mais aguda)
-                    const t2 = startTime + 0.12;
-                    const osc2 = ctx.createOscillator();
-                    const gain2 = ctx.createGain();
-                    osc2.type = 'sine';
-                    osc2.frequency.setValueAtTime(2093, t2); // C7
-                    gain2.gain.setValueAtTime(0.55, t2);
-                    gain2.gain.exponentialRampToValueAtTime(0.0001, t2 + 0.45);
-                    osc2.connect(gain2);
-                    gain2.connect(ctx.destination);
-                    osc2.start(t2);
-                    osc2.stop(t2 + 0.45);
-                }
-
-                // Repetição dupla característica do gestor
-                tocarDuplaSineta(t0);
-                tocarDuplaSineta(t0 + 0.7);
-
-            } else if (tipo === 'motoboy') {
-                // 🛵 SOM 2: TOQUE OFICIAL DO MOTOBOY / JINGLE MARIMBA
-                // Sequência melódica rápida e brilhante
-                const notas = [
-                    { freq: 1174.66, inicio: 0.0, dur: 0.12 }, // D6
-                    { freq: 1479.98, inicio: 0.09, dur: 0.12 }, // F#6
-                    { freq: 1760.00, inicio: 0.18, dur: 0.14 }, // A6
-                    { freq: 2349.32, inicio: 0.28, dur: 0.45 }  // D7 (sustentação)
-                ];
-
-                notas.forEach(n => {
-                    const t = t0 + n.inicio;
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    
-                    // Timbre cristalino estilo xilofone / marimba
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(n.freq, t);
-
-                    gain.gain.setValueAtTime(0.6, t);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, t + n.dur);
-
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-
-                    osc.start(t);
-                    osc.stop(t + n.dur);
-                });
+                console.error("Erro ao tocar arquivo de áudio:", err);
             }
         }
 
