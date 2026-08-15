@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marmita Certa - O Sistema Completo para seu Delivery</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOrange: '#F36A21',
+                        brandOrangeDark: '#D85612',
+                        brandCharcoal: '#2B2B2B',
+                        brandCream: '#F5E9D6',
+                        brandGreen: '#00A86B'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        .btn-glow:hover { box-shadow: 0 10px 25px -5px rgba(243, 106, 33, 0.4); }
+    </style>
+</head>
+<body class="bg-gray-50 text-brandCharcoal antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-full bg-brandCream flex items-center justify-center border-2 border-brandOrange text-brandOrange font-black text-lg">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <span class="text-xl font-black tracking-tight text-brandCharcoal">Marmita <span class="text-brandOrange">Certa</span></span>
+            </div>
+            <a href="https://wa.me/5513988609662?text=Ol%C3%A1!%20Quero%20conhecer%20o%20sistema%20Marmita%20Certa" target="_blank" class="bg-brandOrange hover:bg-brandOrangeDark text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-xl shadow-sm transition btn-glow flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-base"></i> Testar Demonstração
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-12 md:py-20 bg-gradient-to-b from-orange-50/60 to-transparent">
+        <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
+            <span class="bg-orange-100 text-brandOrange text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+                🚀 Para Marmitarias, Lanchonetes e Deliveries de Bairro
+            </span>
+            <h1 class="text-3xl md:text-5xl font-black text-brandCharcoal leading-tight">
+                Organize sua cozinha, seus motoboys e o caixa <span class="text-brandOrange">sem pagar taxas abusivas</span>.
+            </h1>
+            <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Chega de comanda perdida no papel e confusão de troco. Um sistema simples, direto no celular ou computador, feito para quem vive da comida.
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="https://wa.me/5513988609662?text=Quero%20ver%20a%20demonstra%C3%A7%C3%A3o%20do%20Marmita%20Certa" target="_blank" class="w-full sm:w-auto bg-brandGreen hover:bg-emerald-700 text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-lg transition btn-glow flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Quero Ver Funcionando no Zap
+                </a>
+            </div>
+            <p class="text-xs text-gray-400 font-medium">⚡ Não precisa instalar nada • Roda direto no navegador</p>
+        </div>
+    </section>
+
+    <!-- 4 Pilares de Benefícios -->
+    <section class="py-14 max-w-6xl mx-auto px-4">
+        <div class="text-center max-w-2xl mx-auto mb-12 space-y-2">
+            <h2 class="text-2xl md:text-3xl font-black text-brandCharcoal">Tudo que você precisa em 1 única tela</h2>
+            <p class="text-sm text-gray-500">Desenvolvido sob medida para a correria do horário de pico.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-orange-100 text-brandOrange flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+                <h3 class="font-extrabold text-base text-brandCharcoal">Alertas Sonoros Oficiais</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Sons idênticos aos grandes apps para a cozinha não deixar nenhum pedido esfriar e o motoboy ouvir o chamado na hora.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-kitchen-set"></i>
+                </div>
+                <h3 class="font-extrabold text-base text-brandCharcoal">Painel KDS & Cronômetro</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Acompanhe em tempo real: Novos, No Fogo, Na Rota e Entregues. O cartão muda de cor automaticamente se demorar.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-motorcycle"></i>
+                </div>
+                <h3 class="font-extrabold text-base text-brandCharcoal">Despacho com GPS e Taxa</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Envie a rota pronta no WhatsApp do motoboy com link de GPS (Waze/Maps), valor da corrida e aviso se é Pix ou Dinheiro.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-brandGreen flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <h3 class="font-extrabold text-base text-brandCharcoal">Fechamento & Lucro Real</h3>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    O sistema desconta os insumos (comida, embalagem e gás) e gera o extrato de acerto diário do motoboy sem erro de troco.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparativo / Dor do Cliente -->
+    <section class="py-12 bg-white border-y border-gray-200">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-black text-center text-brandCharcoal mb-8">Por que trocar o papel pelo Marmita Certa?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Antes -->
+                <div class="bg-red-50/60 p-6 rounded-2xl border border-red-200 space-y-3">
+                    <h3 class="font-black text-red-700 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-xmark-circle"></i> No Papel e Caderno (Caos)
+                    </h3>
+                    <ul class="space-y-2 text-xs text-red-900/80">
+                        <li>❌ Comanda molha, rasga ou some no fogão.</li>
+                        <li>❌ Cliente esperando e ninguém sabe onde a marmita está.</li>
+                        <li>❌ Motoboy cobra cliente que já pagou no Pix.</li>
+                        <li>❌ No fim do dia, ninguém sabe quanto sobrou de lucro real.</li>
+                    </ul>
+                </div>
+
+                <!-- Depois -->
+                <div class="bg-emerald-50/60 p-6 rounded-2xl border border-emerald-200 space-y-3">
+                    <h3 class="font-black text-emerald-800 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-check-circle"></i> Com o Marmita Certa (Controle)
+                    </h3>
+                    <ul class="space-y-2 text-xs text-emerald-900/90 font-medium">
+                        <li>✅ Comandas digitais organizadas em colunas claras.</li>
+                        <li>✅ Alertas sonoros na cozinha e no celular do motoboy.</li>
+                        <li>✅ Motoboy navega com 1 toque no Waze e confirma na porta.</li>
+                        <li>✅ Fechamento automático com extrato pronto no WhatsApp.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oferta de Implantação / CTA Final -->
+    <section class="py-16 bg-gradient-to-t from-orange-100/50 to-transparent">
+        <div class="max-w-2xl mx-auto px-4 text-center space-y-5">
+            <h2 class="text-3xl font-black text-brandCharcoal">Pronto para colocar ordem na sua operação hoje?</h2>
+            <p class="text-sm text-gray-600">
+                Instalação rápida com seu cardápio, dados do comércio e suporte direto pelo WhatsApp.
+            </p>
+            <div class="pt-2">
+                <a href="https://wa.me/5513988609662?text=Ol%C3%A1!%20Quero%20implantar%20o%20Marmita%20Certa%20no%20meu%20restaurante" target="_blank" class="bg-brandOrange hover:bg-brandOrangeDark text-white font-black text-base px-8 py-4 rounded-2xl shadow-xl transition btn-glow inline-flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Falar com o Consultor no WhatsApp
+                </a>
+            </div>
+            <p class="text-[11px] text-gray-500">Sem mensalidades abusivas ou taxas por pedido.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-400">
+        <p>© 2026 Marmita Certa. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
