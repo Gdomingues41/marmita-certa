@@ -28,11 +28,8 @@
         .dish-card:active { transform: scale(0.98); }
         .dish-card.selected { border-color: #F36A21; background-color: #2F2A26; box-shadow: 0 10px 25px -5px rgba(243, 106, 33, 0.3); }
         .size-btn.selected { background-color: #F36A21; color: white; border-color: #F36A21; }
-        .zoom-badge { backdrop-blur: 4px; }
+        .zoom-badge { backdrop-filter: blur(4px); }
 
-        /* ================================================================= */
-        /* ANIMAÇÃO DE FUMAÇA / VAPOR REALISTA EM TELA CHEIA (LIGHTBOX)      */
-        /* ================================================================= */
         .steam-container {
             position: absolute;
             inset: 0;
@@ -58,21 +55,10 @@
         .steam-4 { left: 35%; width: 100px; height: 170px; animation-delay: 0.6s; }
 
         @keyframes subirVapor {
-            0% {
-                transform: translateY(10px) translateX(0) scale(0.6);
-                opacity: 0;
-            }
-            25% {
-                opacity: 0.65;
-            }
-            50% {
-                transform: translateY(-80px) translateX(12px) scale(1.1);
-                opacity: 0.45;
-            }
-            100% {
-                transform: translateY(-190px) translateX(-15px) scale(1.7);
-                opacity: 0;
-            }
+            0% { transform: translateY(10px) translateX(0) scale(0.6); opacity: 0; }
+            25% { opacity: 0.65; }
+            50% { transform: translateY(-80px) translateX(12px) scale(1.1); opacity: 0.45; }
+            100% { transform: translateY(-190px) translateX(-15px) scale(1.7); opacity: 0; }
         }
     </style>
 </head>
@@ -375,11 +361,30 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT DE INTERAÇÃO -->
+    <!-- JAVASCRIPT DE INTERAÇÃO DINÂMICO -->
     <script>
         let tamanhoSelecionado = 'M';
         let precoBase = 20.00;
         let misturaSelecionada = 'Bife Acebolado Suculento';
+
+        // Lê o WhatsApp da Cozinha dinamicamente do localStorage (se configurado no sistema.html) ou usa parâmetro de URL (?tel=...) ou padrão
+        function obterTelefoneCozinha() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const telUrl = urlParams.get('tel') || urlParams.get('zap');
+            if (telUrl) return telUrl.replace(/\D/g, '');
+
+            try {
+                const config = JSON.parse(localStorage.getItem('marmita_certa_config'));
+                if (config && config.cozinhaZap) {
+                    return config.cozinhaZap.replace(/\D/g, '');
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+
+            // Número padrão configurável
+            return '13999990000';
+        }
 
         function abrirLightbox(src, titulo) {
             document.getElementById('lightbox-img').src = src;
@@ -477,7 +482,35 @@
             msg += `----------------------------------------\n`;
             msg += `_Favor confirmar o tempo estimado de entrega!_ 🛵`;
 
-            const linkZap = `https://wa.me/5511933796485?text=${encodeURIComponent(msg)}`;
+            // Salva o pedido no localStorage para cair no KDS caso esteja no mesmo domínio/navegador
+            try {
+                let pedidosLocais = JSON.parse(localStorage.getItem('marmita_certa_pedidos')) || [];
+                let itensStr = `1x Marmita ${tamanhoSelecionado} (${misturaSelecionada})`;
+                if (extras.length > 0) itensStr += ` + ${extras.join(', ')}`;
+                if (obs) itensStr += ` - Obs: ${obs}`;
+
+                pedidosLocais.unshift({
+                    id: Math.floor(100 + Math.random() * 900),
+                    cliente: nome,
+                    telefone: '',
+                    tamanho: tamanhoSelecionado,
+                    itens: itensStr,
+                    endereco: endereco,
+                    formaPagamento: pagamento.toLowerCase().includes('pix') ? 'pix_pendente' : (pagamento.toLowerCase().includes('cart') ? 'cartao' : 'dinheiro'),
+                    trocoPara: 0,
+                    taxaMotoboy: 5.00,
+                    valor: total,
+                    status: 'pendente',
+                    criadoEm: Date.now(),
+                    finalizadoEm: null
+                });
+                localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidosLocais));
+            } catch (e) {
+                console.warn(e);
+            }
+
+            const telCozinha = obterTelefoneCozinha();
+            const linkZap = `https://wa.me/55${telCozinha}?text=${encodeURIComponent(msg)}`;
             window.open(linkZap, '_blank');
         }
 
