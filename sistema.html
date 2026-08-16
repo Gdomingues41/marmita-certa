@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marmita Certa - KDS, Pagamentos, Motoboy & Repasse 72h</title>
+    <title>Marmita Certa - KDS, Cardápio Online & Painel do Motoboy</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -47,48 +47,53 @@
 
     <!-- Top Bar -->
     <header class="bg-white dark:bg-brandDarkCard border-b border-gray-200 dark:border-brandDarkBorder sticky top-0 z-30 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="navegarPara('kds')">
-                <img src="logo_marmita.png" alt="Marmita Certa" class="w-10 h-10 rounded-full object-cover border-2 border-brandOrange shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 py-2 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5 cursor-pointer" onclick="navegarPara('kds')">
+                <img src="logo_marmita.png" alt="Marmita Certa" class="w-9 h-9 rounded-full object-cover border-2 border-brandOrange shadow-sm" onerror="this.src='https://via.placeholder.com/40/F36A21/FFFFFF?text=MC'">
                 <div>
-                    <h1 class="text-lg md:text-xl font-black text-brandCharcoal dark:text-white leading-tight">
+                    <h1 class="text-base sm:text-lg font-black text-brandCharcoal dark:text-white leading-tight">
                         Marmita <span class="text-brandOrange">Certa</span>
                     </h1>
-                    <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold hidden sm:block">KDS • Despacho WhatsApp • Contato Direto • Repasse 72h</p>
+                    <p class="text-[9px] text-gray-500 dark:text-gray-400 font-bold hidden sm:block">Cardápio Zap • KDS Cozinha • Motoboy • Repasse 72h</p>
                 </div>
             </div>
 
             <!-- Navegação Principal -->
-            <nav class="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-brandCharcoal p-1.5 rounded-2xl border border-gray-200 dark:border-brandDarkBorder">
-                <button onclick="navegarPara('kds')" id="nav-kds" class="tab-btn active-tab px-3 py-1.5 rounded-xl text-xs font-black bg-brandOrange text-white shadow-xs transition">
-                    <i class="fa-solid fa-bell mr-1"></i> 1. KDS Cozinha
+            <nav class="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-brandCharcoal p-1 rounded-2xl border border-gray-200 dark:border-brandDarkBorder">
+                <button onclick="navegarPara('cardapio')" id="nav-cardapio" class="tab-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
+                    <i class="fa-solid fa-utensils text-brandOrange mr-1"></i> 1. Cardápio Cliente
                 </button>
-                <button onclick="navegarPara('motoboy')" id="nav-motoboy" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
-                    <i class="fa-solid fa-motorcycle mr-1"></i> 2. Motoboy
+                <button onclick="navegarPara('kds')" id="nav-kds" class="tab-btn active-tab px-2.5 py-1.5 rounded-xl text-xs font-black bg-brandOrange text-white shadow-xs transition">
+                    <i class="fa-solid fa-bell mr-1"></i> 2. KDS Cozinha
                 </button>
-                <button onclick="navegarPara('historico')" id="nav-historico" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
-                    <i class="fa-solid fa-clock-rotate-left mr-1"></i> 3. Histórico
+                <button onclick="navegarPara('motoboy')" id="nav-motoboy" class="tab-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
+                    <i class="fa-solid fa-motorcycle mr-1"></i> 3. Motoboy
                 </button>
-                <button onclick="navegarPara('ficha')" id="nav-ficha" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
-                    <i class="fa-solid fa-calculator mr-1"></i> 4. Ficha Técnica
+                <button onclick="navegarPara('historico')" id="nav-historico" class="tab-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
+                    <i class="fa-solid fa-clock-rotate-left mr-1"></i> 4. Histórico
                 </button>
-                <button onclick="navegarPara('insumos')" id="nav-insumos" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
-                    <i class="fa-solid fa-boxes-stacked mr-1"></i> 5. Insumos
+                <button onclick="navegarPara('ficha')" id="nav-ficha" class="tab-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
+                    <i class="fa-solid fa-calculator mr-1"></i> 5. Ficha
                 </button>
-                <button onclick="navegarPara('fechamento')" id="nav-fechamento" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
+                <button onclick="navegarPara('fechamento')" id="nav-fechamento" class="tab-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition">
                     <i class="fa-solid fa-file-invoice-dollar mr-1"></i> 6. Caixa
                 </button>
             </nav>
 
-            <!-- Testes Rápidos dos 2 Sons e Dark Mode -->
-            <div class="flex items-center gap-2">
-                <button onclick="tocarAlertaSonoro('pedido')" title="Ouvir Alerta de Pedido" class="bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-300 border border-red-200 dark:border-red-800 text-xs font-bold px-2.5 py-2 rounded-xl transition btn-press flex items-center gap-1">
-                    <i class="fa-solid fa-bell"></i> Som Pedido
+            <!-- Ações Rápidas: Cadastro do Motoboy, Sons & Tema -->
+            <div class="flex items-center gap-1.5">
+                <button onclick="abrirModalConfigMotoboy()" title="Cadastrar / Configurar Motoboy e WhatsApps" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-black px-3 py-2 rounded-xl transition btn-press flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-id-badge"></i>
+                    <span>Cadastrar Motoboy</span>
                 </button>
-                <button onclick="tocarAlertaSonoro('motoboy')" title="Ouvir Alerta do Motoboy" class="bg-orange-50 hover:bg-orange-100 text-brandOrange dark:bg-orange-950/40 dark:text-orange-300 border border-orange-200 dark:border-orange-800 text-xs font-bold px-2.5 py-2 rounded-xl transition btn-press flex items-center gap-1">
-                    <i class="fa-solid fa-motorcycle"></i> Som Motoboy
+
+                <button onclick="tocarAlertaSonoro('pedido')" title="Testar Som do Pedido" class="bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-300 border border-red-200 dark:border-red-800 text-xs font-bold px-2 py-2 rounded-xl transition btn-press flex items-center gap-1">
+                    <i class="fa-solid fa-bell"></i>
                 </button>
-                <button onclick="alternarModoEscuro()" class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-brandCharcoal border border-gray-200 dark:border-brandDarkBorder text-gray-700 dark:text-amber-400 flex items-center justify-center text-xs shadow-xs btn-press">
+                <button onclick="tocarAlertaSonoro('motoboy')" title="Testar Som do Motoboy" class="bg-orange-50 hover:bg-orange-100 text-brandOrange dark:bg-orange-950/40 dark:text-orange-300 border border-orange-200 dark:border-orange-800 text-xs font-bold px-2 py-2 rounded-xl transition btn-press flex items-center gap-1">
+                    <i class="fa-solid fa-motorcycle"></i>
+                </button>
+                <button onclick="alternarModoEscuro()" class="w-8 h-8 rounded-xl bg-gray-100 dark:bg-brandCharcoal border border-gray-200 dark:border-brandDarkBorder text-gray-700 dark:text-amber-400 flex items-center justify-center text-xs shadow-xs btn-press">
                     <i id="theme-icon" class="fa-solid fa-moon"></i>
                 </button>
             </div>
@@ -98,6 +103,176 @@
     <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-4 py-5 w-full flex-grow">
 
+        <!-- 0. CARDÁPIO DIGITAL DO CLIENTE (PEDIDO REAL COM DISPARO PARA O KDS & WHATSAPP) -->
+        <section id="view-cardapio" class="view-panel hidden space-y-6">
+            <div class="bg-gradient-to-r from-orange-600 to-amber-600 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <span class="bg-white/20 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full">Cardápio Online • Marmita Certa</span>
+                    <h2 class="text-2xl md:text-3xl font-black mt-2">Faça seu Pedido Online 🔥</h2>
+                    <p class="text-xs text-orange-100 mt-1 max-w-xl">
+                        Escolha seu prato, preencha seus dados de entrega e forma de pagamento. Ao clicar em enviar, o pedido abre no seu WhatsApp e <strong>cai instantaneamente na cozinha (KDS) tocando o alerta sonoro!</strong>
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/20 text-center">
+                    <p class="text-[10px] uppercase font-bold text-orange-100">WhatsApp da Cozinha</p>
+                    <p id="cardapio-zap-cozinha-display" class="text-sm font-black tracking-wider text-white">13999990000</p>
+                </div>
+            </div>
+
+            <!-- Formulário do Cliente -->
+            <form onsubmit="realizarPedidoCliente(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Coluna Esquerda: Escolha da Marmita -->
+                <div class="lg:col-span-7 bg-white dark:bg-brandDarkCard p-6 rounded-3xl border border-gray-200 dark:border-brandDarkBorder shadow-sm space-y-5">
+                    <h3 class="text-base font-black text-brandCharcoal dark:text-white flex items-center gap-2 pb-3 border-b border-gray-100 dark:border-brandDarkBorder">
+                        <span class="w-6 h-6 rounded-full bg-brandOrange text-white flex items-center justify-center text-xs">1</span>
+                        Escolha o Tamanho da sua Marmita
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="cardapio-tamanho" value="P" class="peer sr-only" onchange="atualizarResumoCardapio()">
+                            <div class="p-4 rounded-2xl border-2 border-gray-200 dark:border-brandDarkBorder peer-checked:border-brandOrange peer-checked:bg-orange-50/50 dark:peer-checked:bg-orange-950/30 transition text-center space-y-1">
+                                <span class="bg-orange-100 text-brandOrange text-[10px] font-black px-2 py-0.5 rounded-md">TAMANHO P</span>
+                                <h4 class="font-black text-sm text-brandCharcoal dark:text-white">Econômica</h4>
+                                <p class="text-lg font-black text-brandOrange">R$ 10,00</p>
+                                <p class="text-[10px] text-gray-400">120g arroz, 80g feijão, 100g mistura</p>
+                            </div>
+                        </label>
+
+                        <label class="cursor-pointer">
+                            <input type="radio" name="cardapio-tamanho" value="M" checked class="peer sr-only" onchange="atualizarResumoCardapio()">
+                            <div class="p-4 rounded-2xl border-2 border-gray-200 dark:border-brandDarkBorder peer-checked:border-brandOrange peer-checked:bg-orange-50/50 dark:peer-checked:bg-orange-950/30 transition text-center space-y-1 relative">
+                                <span class="absolute -top-2.5 right-2 bg-brandOrange text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase">Top 1 🔥</span>
+                                <span class="bg-orange-100 text-brandOrange text-[10px] font-black px-2 py-0.5 rounded-md">TAMANHO M</span>
+                                <h4 class="font-black text-sm text-brandCharcoal dark:text-white">Tradicional</h4>
+                                <p class="text-lg font-black text-brandOrange">R$ 20,00</p>
+                                <p class="text-[10px] text-gray-400">200g arroz, 120g feijão, 180g mistura</p>
+                            </div>
+                        </label>
+
+                        <label class="cursor-pointer">
+                            <input type="radio" name="cardapio-tamanho" value="G" class="peer sr-only" onchange="atualizarResumoCardapio()">
+                            <div class="p-4 rounded-2xl border-2 border-gray-200 dark:border-brandDarkBorder peer-checked:border-brandOrange peer-checked:bg-orange-50/50 dark:peer-checked:bg-orange-950/30 transition text-center space-y-1">
+                                <span class="bg-orange-100 text-brandOrange text-[10px] font-black px-2 py-0.5 rounded-md">TAMANHO G</span>
+                                <h4 class="font-black text-sm text-brandCharcoal dark:text-white">Executiva</h4>
+                                <p class="text-lg font-black text-brandOrange">R$ 30,00</p>
+                                <p class="text-[10px] text-gray-400">300g arroz, 180g feijão, 250g mistura</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <h3 class="text-base font-black text-brandCharcoal dark:text-white flex items-center gap-2 pt-3 pb-2 border-b border-gray-100 dark:border-brandDarkBorder">
+                        <span class="w-6 h-6 rounded-full bg-brandOrange text-white flex items-center justify-center text-xs">2</span>
+                        Escolha a Mistura / Prato do Dia
+                    </h3>
+
+                    <div class="space-y-2">
+                        <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 dark:border-brandDarkBorder hover:bg-gray-50 dark:hover:bg-brandCharcoal cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="cardapio-prato" value="Contrafilé Acebolado com Batata Frita" checked class="text-brandOrange focus:ring-brandOrange">
+                                <div>
+                                    <p class="font-bold text-xs text-brandCharcoal dark:text-white">🥩 Contrafilé Acebolado com Batata Frita</p>
+                                    <p class="text-[10px] text-gray-400">Acompanha arroz, feijão carioca e farofa especial</p>
+                                </div>
+                            </div>
+                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Disponível</span>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 dark:border-brandDarkBorder hover:bg-gray-50 dark:hover:bg-brandCharcoal cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="cardapio-prato" value="Feijoada Completa com Couve e Laranja" class="text-brandOrange focus:ring-brandOrange">
+                                <div>
+                                    <p class="font-bold text-xs text-brandCharcoal dark:text-white">🍲 Feijoada Completa com Couve & Torresmo</p>
+                                    <p class="text-[10px] text-gray-400">Feijão preto encorpado com carnes nobres e arroz</p>
+                                </div>
+                            </div>
+                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Disponível</span>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 dark:border-brandDarkBorder hover:bg-gray-50 dark:hover:bg-brandCharcoal cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="cardapio-prato" value="Filé de Frango Grelhado com Legumes no Vapor" class="text-brandOrange focus:ring-brandOrange">
+                                <div>
+                                    <p class="font-bold text-xs text-brandCharcoal dark:text-white">🍗 Frango Grelhado com Legumes</p>
+                                    <p class="text-[10px] text-gray-400">Opção leve com brócolis, cenoura na manteiga e arroz</p>
+                                </div>
+                            </div>
+                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Disponível</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase mb-1">Observações do Pedido (Opcional)</label>
+                        <input type="text" id="cardapio-obs" placeholder="Ex: Sem cebola, caprichar no feijão..." class="w-full px-3 py-2 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-brandOrange">
+                    </div>
+                </div>
+
+                <!-- Coluna Direita: Dados de Entrega & Pagamento do Cliente -->
+                <div class="lg:col-span-5 bg-white dark:bg-brandDarkCard p-6 rounded-3xl border border-gray-200 dark:border-brandDarkBorder shadow-sm space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <h3 class="text-base font-black text-brandCharcoal dark:text-white flex items-center gap-2 pb-2 border-b border-gray-100 dark:border-brandDarkBorder">
+                            <span class="w-6 h-6 rounded-full bg-brandOrange text-white flex items-center justify-center text-xs">3</span>
+                            Seus Dados de Entrega
+                        </h3>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Seu Nome Completo</label>
+                            <input type="text" id="cardapio-cliente-nome" required placeholder="Ex: Gabriel Domingues" class="w-full px-3 py-2 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-brandOrange">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Seu WhatsApp (com DDD)</label>
+                            <input type="tel" id="cardapio-cliente-tel" required placeholder="Ex: 13997880011" class="w-full px-3 py-2 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-brandOrange">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Endereço de Entrega (Rua, Nº, Bairro e Apto)</label>
+                            <input type="text" id="cardapio-cliente-end" required placeholder="Ex: Av. Pres. Kennedy, 1400 - Apto 32 - Guilhermina" class="w-full px-3 py-2 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-brandOrange">
+                        </div>
+
+                        <!-- Pagamento do Cliente -->
+                        <div class="p-3 bg-orange-50 dark:bg-brandCharcoal/70 rounded-2xl border border-orange-200 dark:border-brandDarkBorder space-y-2">
+                            <label class="block text-xs font-black uppercase text-brandOrange">Forma de Pagamento</label>
+                            <select id="cardapio-cliente-pagamento" onchange="alternarTrocoCardapio()" class="w-full px-3 py-2 bg-white dark:bg-brandDarkCard border border-gray-300 dark:border-brandDarkBorder rounded-xl font-bold text-xs outline-none">
+                                <option value="pix_pago">🟢 Pix Já Pago (Chave enviada no Zap)</option>
+                                <option value="pix_pendente">🟡 Pix na Entrega (Vou mostrar o comprovante)</option>
+                                <option value="cartao">💳 Cartão de Crédito / Débito (Levar maquininha)</option>
+                                <option value="dinheiro">💵 Dinheiro em Espécie (Pagar na porta)</option>
+                            </select>
+
+                            <div id="cardapio-troco-box" class="hidden pt-1">
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase">Precisa de troco para quanto?</label>
+                                <input type="number" id="cardapio-cliente-troco" placeholder="Ex: 50.00" step="1.00" class="w-full px-3 py-1.5 bg-white dark:bg-brandDarkCard border border-gray-300 dark:border-brandDarkBorder rounded-xl text-xs outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumo e Envio -->
+                    <div class="space-y-3 pt-3 border-t border-gray-100 dark:border-brandDarkBorder">
+                        <div class="bg-gray-50 dark:bg-brandCharcoal p-3.5 rounded-2xl space-y-1.5 text-xs">
+                            <div class="flex justify-between font-bold text-gray-500">
+                                <span>Marmita:</span>
+                                <span id="cardapio-resumo-item" class="text-brandCharcoal dark:text-white font-extrabold">Marmita M (R$ 20,00)</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-gray-500">
+                                <span>Taxa de Entrega Estimada:</span>
+                                <span class="text-brandOrange font-extrabold">R$ 5,00</span>
+                            </div>
+                            <div class="flex justify-between font-black text-sm pt-2 border-t border-gray-200 dark:border-brandDarkBorder text-brandCharcoal dark:text-white">
+                                <span>Total a Pagar:</span>
+                                <span id="cardapio-resumo-total" class="text-emerald-600 dark:text-emerald-400 font-black text-lg">R$ 25,00</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-4 rounded-2xl shadow-lg shadow-emerald-500/20 btn-press flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> ENVIAR PEDIDO PARA A COZINHA
+                        </button>
+                        <p class="text-[10px] text-center text-gray-400">O pedido abrirá no WhatsApp e brotará instantaneamente no KDS da cozinha.</p>
+                    </div>
+                </div>
+            </form>
+        </section>
+
         <!-- 1. KDS COZINHA -->
         <section id="view-kds" class="view-panel space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-brandDarkCard p-4 rounded-2xl border border-gray-200 dark:border-brandDarkBorder shadow-sm">
@@ -105,14 +280,14 @@
                     <h2 class="text-xl font-black text-brandCharcoal dark:text-white flex items-center gap-2">
                         <i class="fa-solid fa-kitchen-set text-brandOrange"></i> Painel de Comandas da Cozinha
                     </h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Instruções de pagamento e botão direto para despachar a rota no WhatsApp do entregador.</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Receba pedidos em tempo real do Zap/Cardápio e despache direto para o WhatsApp do Motoboy.</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="abrirModalNovoPedido()" class="text-xs bg-brandOrange hover:bg-brandOrangeDark text-white font-black px-3.5 py-2 rounded-xl shadow-xs btn-press flex items-center gap-1.5">
-                        <i class="fa-solid fa-plus-circle"></i> + Novo Pedido (Zap)
+                    <button onclick="navegarPara('cardapio')" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3.5 py-2 rounded-xl shadow-xs btn-press flex items-center gap-1.5">
+                        <i class="fa-solid fa-utensils"></i> Abrir Cardápio Cliente
                     </button>
-                    <button onclick="simularPedidoWhatsApp()" class="text-xs bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-3 py-2 rounded-xl shadow-xs btn-press flex items-center gap-1">
-                        <i class="fa-brands fa-whatsapp"></i> + Simular
+                    <button onclick="abrirModalNovoPedido()" class="text-xs bg-brandOrange hover:bg-brandOrangeDark text-white font-black px-3.5 py-2 rounded-xl shadow-xs btn-press flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus-circle"></i> + Lançar Pedido Manual
                     </button>
                 </div>
             </div>
@@ -178,7 +353,10 @@
         <section id="view-motoboy" class="view-panel hidden space-y-5">
             <div class="bg-gradient-to-r from-orange-500 to-amber-600 text-white p-5 rounded-2xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <span class="text-[11px] font-black uppercase tracking-wider opacity-90">Painel do Entregador</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] font-black uppercase tracking-wider opacity-90">Painel do Entregador</span>
+                        <span id="motoboy-nome-tag" class="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">Entregador: Rodrigo</span>
+                    </div>
                     <h2 class="text-2xl font-black flex items-center gap-2 mt-0.5">
                         <i class="fa-solid fa-motorcycle"></i> Rotas de Entrega & Repasse
                     </h2>
@@ -316,16 +494,16 @@
                             <span class="text-2xl font-black text-brandOrange">R$ 10,00</span>
                         </div>
                         <div class="space-y-2 text-xs mb-4">
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Arroz (120g):</span> <strong id="p-arroz-custo">R$ 0,64</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Feijão (80g):</span> <strong id="p-feijao-custo">R$ 0,63</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Mistura (100g):</span> <strong id="p-carne-custo">R$ 4,20</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Embalagem P + Sacola:</span> <strong id="p-emb-custo">R$ 0,70</strong></div>
-                            <div class="flex justify-between text-amber-600 dark:text-amber-400"><span>Gás/Energia (15%):</span> <strong id="p-fixo-custo">R$ 0,92</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Arroz (120g):</span> <strong>R$ 0,64</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Feijão (80g):</span> <strong>R$ 0,63</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Mistura (100g):</span> <strong>R$ 4,20</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Embalagem P + Sacola:</span> <strong>R$ 0,70</strong></div>
+                            <div class="flex justify-between text-amber-600 dark:text-amber-400"><span>Gás/Energia (15%):</span> <strong>R$ 0,92</strong></div>
                         </div>
                     </div>
                     <div class="bg-brandCream/50 dark:bg-brandCharcoal p-4 rounded-xl border border-orange-200 dark:border-brandDarkBorder">
-                        <div class="flex justify-between text-xs font-bold text-gray-500 mb-1"><span>Custo de Produção:</span><span id="p-custo-total" class="font-extrabold text-brandCharcoal dark:text-white">R$ 7,09</span></div>
-                        <div class="flex justify-between items-baseline pt-2 border-t border-orange-200 dark:border-brandDarkBorder"><span class="text-xs font-black text-emerald-700 dark:text-emerald-400 uppercase">Lucro no Bolso:</span><span id="p-lucro-liquido" class="text-xl font-black text-emerald-600 dark:text-emerald-400">R$ 2,91</span></div>
+                        <div class="flex justify-between text-xs font-bold text-gray-500 mb-1"><span>Custo de Produção:</span><span class="font-extrabold text-brandCharcoal dark:text-white">R$ 7,09</span></div>
+                        <div class="flex justify-between items-baseline pt-2 border-t border-orange-200 dark:border-brandDarkBorder"><span class="text-xs font-black text-emerald-700 dark:text-emerald-400 uppercase">Lucro no Bolso:</span><span class="text-xl font-black text-emerald-600 dark:text-emerald-400">R$ 2,91</span></div>
                     </div>
                 </div>
 
@@ -341,16 +519,16 @@
                             <span class="text-2xl font-black text-brandOrange">R$ 20,00</span>
                         </div>
                         <div class="space-y-2 text-xs mb-4">
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Arroz (200g):</span> <strong id="m-arroz-custo">R$ 1,06</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Feijão (120g):</span> <strong id="m-feijao-custo">R$ 0,95</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Mistura (180g):</span> <strong id="m-carne-custo">R$ 7,56</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Embalagem M + Sacola:</span> <strong id="m-emb-custo">R$ 0,87</strong></div>
-                            <div class="flex justify-between text-amber-600 dark:text-amber-400"><span>Gás/Energia (15%):</span> <strong id="m-fixo-custo">R$ 1,57</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Arroz (200g):</span> <strong>R$ 1,06</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Feijão (120g):</span> <strong>R$ 0,95</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Mistura (180g):</span> <strong>R$ 7,56</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Embalagem M + Sacola:</span> <strong>R$ 0,87</strong></div>
+                            <div class="flex justify-between text-amber-600 dark:text-amber-400"><span>Gás/Energia (15%):</span> <strong>R$ 1,57</strong></div>
                         </div>
                     </div>
                     <div class="bg-emerald-50 dark:bg-emerald-950/40 p-4 rounded-xl border border-emerald-200 dark:border-emerald-800">
-                        <div class="flex justify-between text-xs font-bold text-emerald-800 dark:text-emerald-300 mb-1"><span>Custo de Produção:</span><span id="m-custo-total" class="font-extrabold">R$ 12,01</span></div>
-                        <div class="flex justify-between items-baseline pt-2 border-t border-emerald-200 dark:border-emerald-800"><span class="text-xs font-black text-emerald-900 dark:text-emerald-200 uppercase">Lucro no Bolso:</span><span id="m-lucro-liquido" class="text-xl font-black text-emerald-600 dark:text-emerald-400">R$ 7,99</span></div>
+                        <div class="flex justify-between text-xs font-bold text-emerald-800 dark:text-emerald-300 mb-1"><span>Custo de Produção:</span><span class="font-extrabold">R$ 12,01</span></div>
+                        <div class="flex justify-between items-baseline pt-2 border-t border-emerald-200 dark:border-emerald-800"><span class="text-xs font-black text-emerald-900 dark:text-emerald-200 uppercase">Lucro no Bolso:</span><span class="text-xl font-black text-emerald-600 dark:text-emerald-400">R$ 7,99</span></div>
                     </div>
                 </div>
 
@@ -365,100 +543,16 @@
                             <span class="text-2xl font-black text-brandOrange">R$ 30,00</span>
                         </div>
                         <div class="space-y-2 text-xs mb-4">
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Arroz (300g):</span> <strong id="g-arroz-custo">R$ 1,59</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Feijão (180g):</span> <strong id="g-feijao-custo">R$ 1,42</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Mistura (250g):</span> <strong id="g-carne-custo">R$ 10,50</strong></div>
-                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Embalagem G + Sacola:</span> <strong id="g-emb-custo">R$ 1,10</strong></div>
-                            <div class="flex justify-between text-amber-600 dark:text-amber-400"><span>Gás/Energia (15%):</span> <strong id="g-fixo-custo">R$ 2,19</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Arroz (300g):</span> <strong>R$ 1,59</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Feijão (180g):</span> <strong>R$ 1,42</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Mistura (250g):</span> <strong>R$ 10,50</strong></div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-300"><span>Embalagem G + Sacola:</span> <strong>R$ 1,10</strong></div>
+                            <div class="flex justify-between text-amber-600 dark:text-amber-400"><span>Gás/Energia (15%):</span> <strong>R$ 2,19</strong></div>
                         </div>
                     </div>
                     <div class="bg-brandCream/50 dark:bg-brandCharcoal p-4 rounded-xl border border-orange-200 dark:border-brandDarkBorder">
-                        <div class="flex justify-between text-xs font-bold text-gray-500 mb-1"><span>Custo de Produção:</span><span id="g-custo-total" class="font-extrabold text-brandCharcoal dark:text-white">R$ 16,80</span></div>
-                        <div class="flex justify-between items-baseline pt-2 border-t border-orange-200 dark:border-brandDarkBorder"><span class="text-xs font-black text-emerald-700 dark:text-emerald-400 uppercase">Lucro no Bolso:</span><span id="g-lucro-liquido" class="text-xl font-black text-emerald-600 dark:text-emerald-400">R$ 13,20</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. INSUMOS -->
-        <section id="view-insumos" class="view-panel hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-5">
-                    <div class="bg-white dark:bg-brandDarkCard rounded-2xl p-5 shadow-sm border border-gray-200 dark:border-brandDarkBorder">
-                        <h3 class="font-extrabold text-base text-brandCharcoal dark:text-white mb-4 pb-2 border-b border-gray-100 dark:border-brandDarkBorder flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-lg bg-brandOrange text-white flex items-center justify-center text-xs"><i class="fa-solid fa-plus"></i></span>
-                            Novo Insumo de Mercado
-                        </h3>
-                        <form id="form-insumo" onsubmit="salvarInsumo(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-bold uppercase mb-1">Categoria</label>
-                                <div class="grid grid-cols-3 gap-2">
-                                    <label class="cursor-pointer">
-                                        <input type="radio" name="categoria" value="Alimento" checked class="peer sr-only">
-                                        <div class="text-center py-2 text-xs font-bold rounded-xl border border-gray-200 dark:border-brandDarkBorder peer-checked:border-brandOrange peer-checked:bg-orange-50 dark:peer-checked:bg-orange-950/40 peer-checked:text-brandOrange transition">🍲 Alimento</div>
-                                    </label>
-                                    <label class="cursor-pointer">
-                                        <input type="radio" name="categoria" value="Embalagem" class="peer sr-only">
-                                        <div class="text-center py-2 text-xs font-bold rounded-xl border border-gray-200 dark:border-brandDarkBorder peer-checked:border-brandOrange peer-checked:bg-orange-50 dark:peer-checked:bg-orange-950/40 peer-checked:text-brandOrange transition">📦 Embalagem</div>
-                                    </label>
-                                    <label class="cursor-pointer">
-                                        <input type="radio" name="categoria" value="Tempero/Outro" class="peer sr-only">
-                                        <div class="text-center py-2 text-xs font-bold rounded-xl border border-gray-200 dark:border-brandDarkBorder peer-checked:border-brandOrange peer-checked:bg-orange-50 dark:peer-checked:bg-orange-950/40 peer-checked:text-brandOrange transition">🧂 Tempero</div>
-                                    </label>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold uppercase mb-1">Nome do Item</label>
-                                <input type="text" id="insumo-nome" required placeholder="Ex: Alcatra, Arroz 5kg" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-sm font-semibold outline-none focus:ring-2 focus:ring-brandOrange">
-                            </div>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-xs font-bold uppercase mb-1">Qtd. Comprada</label>
-                                    <input type="number" id="insumo-qtd" step="0.01" min="0.01" required placeholder="Ex: 5" oninput="previewUnitario()" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-sm font-semibold outline-none focus:ring-2 focus:ring-brandOrange">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase mb-1">Unidade</label>
-                                    <select id="insumo-unidade" onchange="previewUnitario()" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-sm font-semibold outline-none focus:ring-2 focus:ring-brandOrange">
-                                        <option value="kg">Quilo (kg)</option>
-                                        <option value="g">Grama (g)</option>
-                                        <option value="L">Litro (L)</option>
-                                        <option value="un">Unidade (un)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold uppercase mb-1">Preço Total Pago (R$)</label>
-                                <input type="number" id="insumo-preco" step="0.01" min="0.01" required placeholder="0,00" oninput="previewUnitario()" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-brandCharcoal border border-gray-300 dark:border-brandDarkBorder rounded-xl text-base font-extrabold outline-none focus:ring-2 focus:ring-brandOrange">
-                            </div>
-                            <div class="bg-brandCream/60 dark:bg-brandCharcoal p-3 rounded-xl border border-orange-200 dark:border-brandDarkBorder flex justify-between items-center text-xs">
-                                <span class="font-bold text-gray-500 dark:text-gray-400">Preço p/ Grama/Unidade:</span>
-                                <strong id="insumo-preview-calc" class="text-brandOrange font-black">R$ 0,0000</strong>
-                            </div>
-                            <button type="submit" class="w-full bg-brandOrange hover:bg-brandOrangeDark text-white font-black py-3 rounded-xl shadow-md transition btn-press flex items-center justify-center gap-2 text-sm"><i class="fa-solid fa-check"></i> Salvar Insumo</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-7 space-y-4">
-                    <div class="bg-white dark:bg-brandDarkCard rounded-2xl shadow-sm border border-gray-200 dark:border-brandDarkBorder overflow-hidden">
-                        <div class="p-4 border-b border-gray-100 dark:border-brandDarkBorder flex items-center justify-between">
-                            <h3 class="font-extrabold text-sm text-brandCharcoal dark:text-white">Itens Cadastrados para Marmitas</h3>
-                            <button onclick="prefillExemplosInsumos()" class="text-xs text-brandOrange hover:underline font-bold">Recarregar Padrões</button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs border-collapse">
-                                <thead>
-                                    <tr class="bg-gray-50 dark:bg-brandCharcoal text-[11px] font-black text-gray-500 uppercase tracking-wider border-b border-gray-200 dark:border-brandDarkBorder">
-                                        <th class="py-3 px-4">Item</th>
-                                        <th class="py-3 px-3">Compra</th>
-                                        <th class="py-3 px-3">Preço</th>
-                                        <th class="py-3 px-3 text-brandOrange">Custo Base</th>
-                                        <th class="py-3 px-3 text-center">Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabela-insumos-body" class="divide-y divide-gray-100 dark:divide-brandDarkBorder"></tbody>
-                            </table>
-                        </div>
+                        <div class="flex justify-between text-xs font-bold text-gray-500 mb-1"><span>Custo de Produção:</span><span class="font-extrabold text-brandCharcoal dark:text-white">R$ 16,80</span></div>
+                        <div class="flex justify-between items-baseline pt-2 border-t border-orange-200 dark:border-brandDarkBorder"><span class="text-xs font-black text-emerald-700 dark:text-emerald-400 uppercase">Lucro no Bolso:</span><span class="text-xl font-black text-emerald-600 dark:text-emerald-400">R$ 13,20</span></div>
                     </div>
                 </div>
             </div>
@@ -540,7 +634,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                     <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-xl">
                         <span class="text-gray-500 dark:text-gray-400 font-bold block">Diária Fixa do Dia:</span>
-                        <input type="number" id="motoboy-diaria-input" value="40" oninput="calcularFechamento()" class="mt-1 font-black text-sm bg-transparent border-b border-gray-300 dark:border-brandDarkBorder w-20 outline-none">
+                        <input type="number" id="motoboy-diaria-input" value="40" oninput="salvarConfigMotoboyRapida(); calcularFechamento()" class="mt-1 font-black text-sm bg-transparent border-b border-gray-300 dark:border-brandDarkBorder w-20 outline-none">
                     </div>
                     <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-xl">
                         <span class="text-gray-500 dark:text-gray-400 font-bold block">Taxas Corridas (Hoje):</span>
@@ -570,12 +664,62 @@
 
     </main>
 
+    <!-- MODAL DE CADASTRO DO MOTOBOY E CONFIGURAÇÕES DA COZINHA -->
+    <div id="modal-config-motoboy" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs hidden">
+        <div class="bg-white dark:bg-brandDarkCard rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-200 dark:border-brandDarkBorder space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-brandDarkBorder">
+                <h3 class="font-extrabold text-base text-brandCharcoal dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-id-badge text-brandOrange"></i> Cadastro do Motoboy & Cozinha
+                </h3>
+                <button onclick="fecharModalConfigMotoboy()" class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+            <form onsubmit="salvarConfigGeral(event)" class="space-y-3.5 text-xs font-bold">
+                <div class="p-3 bg-orange-50/60 dark:bg-brandCharcoal rounded-2xl border border-orange-100 dark:border-brandDarkBorder space-y-3">
+                    <span class="text-[10px] font-black uppercase text-brandOrange tracking-wider">🛵 Dados do Entregador Padrão</span>
+                    
+                    <div>
+                        <label class="block uppercase mb-1">Nome do Motoboy</label>
+                        <input type="text" id="config-motoboy-nome" required placeholder="Ex: Rodrigo Silva" class="w-full px-3 py-2 bg-white dark:bg-brandDarkCard border border-gray-300 dark:border-brandDarkBorder rounded-xl outline-none focus:ring-2 focus:ring-brandOrange">
+                    </div>
+
+                    <div>
+                        <label class="block uppercase mb-1">WhatsApp do Motoboy (com DDD)</label>
+                        <input type="tel" id="config-motoboy-zap" required placeholder="Ex: 13997778888" class="w-full px-3 py-2 bg-white dark:bg-brandDarkCard border border-gray-300 dark:border-brandDarkBorder rounded-xl outline-none focus:ring-2 focus:ring-brandOrange">
+                        <p class="text-[10px] text-gray-400 mt-0.5">Ao despachar, o KDS manda a rota direto para este número.</p>
+                    </div>
+
+                    <div>
+                        <label class="block uppercase mb-1">Valor da Diária Fixa (R$)</label>
+                        <input type="number" id="config-motoboy-diaria" step="1.00" value="40.00" required class="w-full px-3 py-2 bg-white dark:bg-brandDarkCard border border-gray-300 dark:border-brandDarkBorder rounded-xl outline-none focus:ring-2 focus:ring-brandOrange">
+                    </div>
+                </div>
+
+                <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-2xl border border-gray-200 dark:border-brandDarkBorder space-y-2">
+                    <span class="text-[10px] font-black uppercase text-gray-500 tracking-wider">🍳 Dados do Estabelecimento</span>
+                    <div>
+                        <label class="block uppercase mb-1">WhatsApp da Cozinha / Recepção</label>
+                        <input type="tel" id="config-cozinha-zap" required placeholder="Ex: 13999990000" class="w-full px-3 py-2 bg-white dark:bg-brandDarkCard border border-gray-300 dark:border-brandDarkBorder rounded-xl outline-none focus:ring-2 focus:ring-brandOrange">
+                        <p class="text-[10px] text-gray-400 mt-0.5">Número que receberá as mensagens vindas do cardápio digital.</p>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="fecharModalConfigMotoboy()" class="w-1/3 py-3 border border-gray-200 dark:border-brandDarkBorder rounded-xl text-gray-500 font-bold">Fechar</button>
+                    <button type="submit" class="w-2/3 bg-brandOrange hover:bg-brandOrangeDark text-white py-3 rounded-xl font-black shadow-md btn-press">Salvar Configurações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- MODAL DE NOVO PEDIDO MANUAL COM INSTRUÇÕES COMPLETAS DE PAGAMENTO -->
     <div id="modal-novo-pedido" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs hidden">
         <div class="bg-white dark:bg-brandDarkCard rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 dark:border-brandDarkBorder space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-brandDarkBorder">
                 <h3 class="font-extrabold text-base text-brandCharcoal dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-receipt text-brandOrange"></i> Lançar Pedido
+                    <i class="fa-solid fa-receipt text-brandOrange"></i> Lançar Pedido Manual
                 </h3>
                 <button onclick="fecharModalNovoPedido()" class="text-gray-400 hover:text-gray-600 dark:hover:text-white p-1">
                     <i class="fa-solid fa-xmark text-base"></i>
@@ -671,6 +815,10 @@
 
     <!-- MOBILE NAVIGATION -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-brandDarkCard border-t border-gray-200 dark:border-brandDarkBorder py-2 px-2 flex justify-around items-center z-40 md:hidden shadow-lg">
+        <button onclick="navegarPara('cardapio')" class="mobile-tab-btn text-gray-400 flex flex-col items-center" data-tab="cardapio">
+            <i class="fa-solid fa-utensils text-sm"></i>
+            <span class="text-[9px] font-black mt-0.5">Cardápio</span>
+        </button>
         <button onclick="navegarPara('kds')" class="mobile-tab-btn text-brandOrange flex flex-col items-center" data-tab="kds">
             <i class="fa-solid fa-bell text-sm"></i>
             <span class="text-[9px] font-black mt-0.5">KDS</span>
@@ -683,21 +831,13 @@
             <i class="fa-solid fa-clock-rotate-left text-sm"></i>
             <span class="text-[9px] font-black mt-0.5">Histórico</span>
         </button>
-        <button onclick="navegarPara('ficha')" class="mobile-tab-btn text-gray-400 flex flex-col items-center" data-tab="ficha">
-            <i class="fa-solid fa-calculator text-sm"></i>
-            <span class="text-[9px] font-black mt-0.5">Ficha</span>
-        </button>
-        <button onclick="navegarPara('insumos')" class="mobile-tab-btn text-gray-400 flex flex-col items-center" data-tab="insumos">
-            <i class="fa-solid fa-boxes-stacked text-sm"></i>
-            <span class="text-[9px] font-black mt-0.5">Insumos</span>
-        </button>
         <button onclick="navegarPara('fechamento')" class="mobile-tab-btn text-gray-400 flex flex-col items-center" data-tab="fechamento">
             <i class="fa-solid fa-file-invoice-dollar text-sm"></i>
             <span class="text-[9px] font-black mt-0.5">Caixa</span>
         </button>
     </nav>
 
-    <!-- LOGICA JAVASCRIPT -->
+    <!-- LOGICA JAVASCRIPT EM TEMPO REAL -->
     <script>
         const audioPedido = new Audio('alerta_pedido.mp3');
         const audioMotoboy = new Audio('notificacao_entrega.mp3');
@@ -709,6 +849,14 @@
         let timerOfertaInterval = null;
         let segundosRestantesOferta = 45;
         let corridaOfertadaAtual = null;
+
+        // Configuração do Sistema (Cadastro do Motoboy & Cozinha)
+        let configSistema = JSON.parse(localStorage.getItem('marmita_certa_config')) || {
+            motoboyNome: 'Rodrigo Silva',
+            motoboyZap: '13997778888',
+            motoboyDiaria: 40.00,
+            cozinhaZap: '13999990000'
+        };
 
         function tocarAlertaSonoro(tipo = 'pedido') {
             try {
@@ -722,7 +870,7 @@
                     audioMotoboy.currentTime = 0;
                     audioMotoboy.play().catch(e => console.warn(e));
                     if (!intervalAudioMotoboy) {
-                        // Intervalo ajustado para 6,5 segundos (6500ms) para respirar entre os toques
+                        // Loop com respiração de 6,5 segundos (6500ms)
                         intervalAudioMotoboy = setInterval(() => {
                             audioMotoboy.currentTime = 0;
                             audioMotoboy.play().catch(e => console.warn(e));
@@ -791,7 +939,7 @@
                     }
                     return p;
                 });
-                localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+                salvarPedidos();
                 renderizarKDS();
                 if (abaAtiva === 'motoboy') renderizarVisaoMotoboy();
                 mostrarToast(porTempo ? 'Tempo Esgotado' : 'Corrida Recusada', 'A comanda retornou para a cozinha.', true);
@@ -815,25 +963,32 @@
                 status: 'pendente',
                 criadoEm: Date.now() - (4 * 60 * 1000),
                 finalizadoEm: null
-            },
-            {
-                id: 102,
-                cliente: 'Dona Neusa',
-                telefone: '13999992222',
-                tamanho: 'P',
-                itens: '2x Marmita P (Frango Grelhado)',
-                endereco: 'Rua das Palmeiras, 45',
-                formaPagamento: 'dinheiro',
-                trocoPara: 50.00,
-                taxaMotoboy: 5.00,
-                valor: 20.00,
-                status: 'preparo',
-                criadoEm: Date.now() - (12 * 60 * 1000),
-                finalizadoEm: null
             }
         ];
 
-        let insumos = JSON.parse(localStorage.getItem('marmita_certa_insumos')) || [];
+        function salvarPedidos() {
+            localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+        }
+
+        // Listener de Storage em Realtime (sincroniza abas abertas no mesmo navegador em tempo real)
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'marmita_certa_pedidos') {
+                const novosPedidos = JSON.parse(event.newValue) || [];
+                const qtdAntes = pedidos.length;
+                pedidos = novosPedidos;
+
+                // Se chegou pedido novo enquanto estava no KDS
+                if (pedidos.length > qtdAntes) {
+                    tocarAlertaSonoro('pedido');
+                    mostrarToast('Novo Pedido Chegando!', 'Uma nova comanda brotou na cozinha!');
+                }
+
+                if (abaAtiva === 'kds') renderizarKDS();
+                if (abaAtiva === 'motoboy') renderizarVisaoMotoboy();
+                if (abaAtiva === 'historico') renderizarHistorico();
+                if (abaAtiva === 'fechamento') calcularFechamento();
+            }
+        });
 
         function navegarPara(tabId) {
             abaAtiva = tabId;
@@ -841,10 +996,10 @@
             document.getElementById(`view-${tabId}`).classList.remove('hidden');
 
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition";
+                btn.className = "tab-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-brandOrange transition";
             });
             const activeDesktop = document.getElementById(`nav-${tabId}`);
-            if (activeDesktop) activeDesktop.className = "tab-btn active-tab px-3 py-1.5 rounded-xl text-xs font-black bg-brandOrange text-white shadow-xs transition";
+            if (activeDesktop) activeDesktop.className = "tab-btn active-tab px-2.5 py-1.5 rounded-xl text-xs font-black bg-brandOrange text-white shadow-xs transition";
 
             document.querySelectorAll('.mobile-tab-btn').forEach(btn => {
                 if (btn.getAttribute('data-tab') === tabId) {
@@ -858,7 +1013,6 @@
             if (tabId === 'historico') renderizarHistorico();
             if (tabId === 'ficha') calcularFichas();
             if (tabId === 'fechamento') calcularFechamento();
-            if (tabId === 'insumos') renderizarTabelaInsumos();
         }
 
         function formatarTimer(tempoCriacao, tempoFinalizacao = null) {
@@ -885,6 +1039,7 @@
             }
         }
 
+        // DISPARO DE ROTA DIRETO PARA O WHATSAPP DO MOTOBOY CADASTRADO
         function enviarRotaWhatsAppMotoboy(id) {
             const p = pedidos.find(item => item.id === id);
             if (!p) return;
@@ -902,12 +1057,16 @@
             }
 
             const rotaUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.endereco)}`;
+            const zapMotoboyLimpo = (configSistema.motoboyZap || '').replace(/\D/g, '');
 
             let msg = `🛵 *NOVA CORRIDA • MARMITA CERTA*
 `;
             msg += `----------------------------------------
 `;
-            msg += `📦 *Pedido:* #${p.id} (${p.cliente})
+            msg += `Olá *${configSistema.motoboyNome || 'Entregador'}*, nova rota liberada:
+
+`;
+            msg += `📦 *Comanda:* #${p.id} (${p.cliente})
 `;
             msg += `📍 *Endereço:* ${p.endereco}
 `;
@@ -928,11 +1087,119 @@
 ${rotaUrl}
 
 `;
-            msg += `_Favor confirmar no sistema ou responder aqui ao entregar!_`;
+            msg += `_Favor confirmar no sistema ao finalizar a entrega!_`;
 
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            const linkZap = zapMotoboyLimpo 
+                ? `https://wa.me/55${zapMotoboyLimpo}?text=${encodeURIComponent(msg)}`
+                : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+
+            window.open(linkZap, '_blank');
         }
 
+        // FLUXO DO CLIENTE PEDINDO NO CARDÁPIO ONLINE
+        function alternarTrocoCardapio() {
+            const forma = document.getElementById('cardapio-cliente-pagamento').value;
+            const trocoBox = document.getElementById('cardapio-troco-box');
+            if (forma === 'dinheiro') trocoBox.classList.remove('hidden');
+            else trocoBox.classList.add('hidden');
+        }
+
+        function atualizarResumoCardapio() {
+            const tam = document.querySelector('input[name="cardapio-tamanho"]:checked').value;
+            let valMarmita = 20.00;
+            let nomeMarmita = "Marmita M (Tradicional)";
+            if (tam === 'P') { valMarmita = 10.00; nomeMarmita = "Marmita P (Econômica)"; }
+            if (tam === 'G') { valMarmita = 30.00; nomeMarmita = "Marmita G (Executiva)"; }
+
+            const total = valMarmita + 5.00; // Marmita + Taxa R$ 5,00
+            document.getElementById('cardapio-resumo-item').innerText = `${nomeMarmita} - R$ ${valMarmita.toFixed(2).replace('.', ',')}`;
+            document.getElementById('cardapio-resumo-total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function realizarPedidoCliente(e) {
+            e.preventDefault();
+
+            const tamanho = document.querySelector('input[name="cardapio-tamanho"]:checked').value;
+            const prato = document.querySelector('input[name="cardapio-prato"]:checked').value;
+            const obs = document.getElementById('cardapio-obs').value.trim();
+            const cliente = document.getElementById('cardapio-cliente-nome').value.trim();
+            const telefone = document.getElementById('cardapio-cliente-tel').value.replace(/\D/g, '');
+            const endereco = document.getElementById('cardapio-cliente-end').value.trim();
+            const formaPagamento = document.getElementById('cardapio-cliente-pagamento').value;
+            const trocoPara = parseFloat(document.getElementById('cardapio-cliente-troco').value) || 0;
+
+            let valorMarmita = 20.00;
+            if (tamanho === 'P') valorMarmita = 10.00;
+            if (tamanho === 'G') valorMarmita = 30.00;
+
+            const itensFormatado = `1x Marmita ${tamanho} (${prato})${obs ? ' - Obs: ' + obs : ''}`;
+
+            const novoPedido = {
+                id: Math.floor(100 + Math.random() * 900),
+                cliente: cliente,
+                telefone: telefone,
+                tamanho: tamanho,
+                itens: itensFormatado,
+                endereco: endereco,
+                formaPagamento: formaPagamento,
+                trocoPara: trocoPara,
+                taxaMotoboy: 5.00,
+                valor: valorMarmita,
+                status: 'pendente',
+                criadoEm: Date.now(),
+                finalizadoEm: null
+            };
+
+            // Salva na memória do sistema (surge no KDS)
+            pedidos.unshift(novoPedido);
+            salvarPedidos();
+
+            // Toca som do pedido na cozinha
+            tocarAlertaSonoro('pedido');
+            renderizarKDS();
+
+            // Formata mensagem para o WhatsApp da Cozinha
+            let textoPagamentoZap = '';
+            if (formaPagamento === 'pix_pago') textoPagamentoZap = '🟢 PIX JÁ PAGO';
+            else if (formaPagamento === 'pix_pendente') textoPagamentoZap = '🟡 PIX NA ENTREGA';
+            else if (formaPagamento === 'cartao') textoPagamentoZap = '💳 CARTÃO (LEVAR MAQUININHA)';
+            else textoPagamentoZap = `💵 DINHEIRO ${trocoPara > valorMarmita ? '(Troco para R$ ' + trocoPara.toFixed(2) + ')' : ''}`;
+
+            let msgZap = `*🍲 NOVO PEDIDO • MARMITA CERTA*
+`;
+            msgZap += `----------------------------------------
+`;
+            msgZap += `👤 *Cliente:* ${cliente}
+`;
+            msgZap += `📞 *WhatsApp:* ${telefone}
+`;
+            msgZap += `📍 *Endereço:* ${endereco}
+`;
+            msgZap += `🍱 *Pedido:* ${itensFormatado}
+`;
+            msgZap += `💳 *Pagamento:* ${textoPagamentoZap}
+`;
+            msgZap += `💰 *Valor Marmita:* R$ ${valorMarmita.toFixed(2).replace('.', ',')} (+ R$ 5,00 entrega)
+`;
+            msgZap += `💵 *TOTAL:* R$ ${(valorMarmita + 5.00).toFixed(2).replace('.', ',')}
+`;
+            msgZap += `----------------------------------------
+`;
+            msgZap += `_Pedido enviado pelo Cardápio Online!_`;
+
+            const zapCozinhaLimpo = (configSistema.cozinhaZap || '').replace(/\D/g, '');
+            const urlZap = zapCozinhaLimpo
+                ? `https://wa.me/55${zapCozinhaLimpo}?text=${encodeURIComponent(msgZap)}`
+                : `https://wa.me/?text=${encodeURIComponent(msgZap)}`;
+
+            window.open(urlZap, '_blank');
+
+            // Feedback visual e navegação para o KDS
+            mostrarToast('Pedido Enviado!', `Comanda #${novoPedido.id} caiu no KDS da cozinha!`);
+            navegarPara('kds');
+        }
+
+        // RENDERIZAÇÃO DO KDS
         function renderizarKDS() {
             const cols = {
                 pendente: document.getElementById('col-pendente'),
@@ -976,8 +1243,11 @@ ${rotaUrl}
                     </div>
 
                     <div>
-                        <h4 class="font-extrabold text-sm text-brandCharcoal dark:text-white">${p.cliente}</h4>
-                        <p class="text-xs font-bold text-gray-700 dark:text-gray-200">${p.itens}</p>
+                        <div class="flex justify-between items-baseline">
+                            <h4 class="font-extrabold text-sm text-brandCharcoal dark:text-white">${p.cliente}</h4>
+                            <span class="text-[10px] text-gray-400 font-bold">${p.telefone || ''}</span>
+                        </div>
+                        <p class="text-xs font-bold text-gray-700 dark:text-gray-200 mt-0.5">${p.itens}</p>
                         <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 truncate"><i class="fa-solid fa-location-dot text-brandOrange mr-1"></i>${p.endereco}</p>
                     </div>
 
@@ -1027,7 +1297,7 @@ ${rotaUrl}
                 }
                 return p;
             });
-            localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+            salvarPedidos();
             
             if (novoStatus === 'entrega') {
                 const pDespachado = pedidos.find(item => item.id === id);
@@ -1043,7 +1313,7 @@ ${rotaUrl}
             mostrarToast('Status Atualizado!', `Pedido movido para "${novoStatus.toUpperCase()}".`);
         }
 
-        // VISÃO DO MOTOBOY COM CONTATO DIRETO & REPASSE 72H
+        // VISÃO DO MOTOBOY
         function renderizarVisaoMotoboy() {
             const container = document.getElementById('motoboy-lista-pedidos');
             const contadorP = document.getElementById('motoboy-contador-pendentes');
@@ -1131,7 +1401,6 @@ ${rotaUrl}
                 });
             }
 
-            // Atualiza cálculos de 72h
             calcularFechamento();
         }
 
@@ -1182,17 +1451,57 @@ ${rotaUrl}
             }).join('');
         }
 
-        // MODAL NOVO PEDIDO MANUAL
+        // CADASTRO DO MOTOBOY & CONFIGURAÇÃO
+        function abrirModalConfigMotoboy() {
+            document.getElementById('config-motoboy-nome').value = configSistema.motoboyNome || '';
+            document.getElementById('config-motoboy-zap').value = configSistema.motoboyZap || '';
+            document.getElementById('config-motoboy-diaria').value = configSistema.motoboyDiaria || 40.00;
+            document.getElementById('config-cozinha-zap').value = configSistema.cozinhaZap || '';
+            document.getElementById('modal-config-motoboy').classList.remove('hidden');
+        }
+
+        function fecharModalConfigMotoboy() {
+            document.getElementById('modal-config-motoboy').classList.add('hidden');
+        }
+
+        function salvarConfigGeral(e) {
+            e.preventDefault();
+            configSistema.motoboyNome = document.getElementById('config-motoboy-nome').value.trim();
+            configSistema.motoboyZap = document.getElementById('config-motoboy-zap').value.replace(/\D/g, '');
+            configSistema.motoboyDiaria = parseFloat(document.getElementById('config-motoboy-diaria').value) || 40.00;
+            configSistema.cozinhaZap = document.getElementById('config-cozinha-zap').value.replace(/\D/g, '');
+
+            localStorage.setItem('marmita_certa_config', JSON.stringify(configSistema));
+            atualizarDisplaysConfig();
+            fecharModalConfigMotoboy();
+            calcularFechamento();
+            mostrarToast('Dados Salvos!', 'Cadastro do Motoboy e Cozinha atualizados.');
+        }
+
+        function salvarConfigMotoboyRapida() {
+            configSistema.motoboyDiaria = parseFloat(document.getElementById('motoboy-diaria-input').value) || 0;
+            localStorage.setItem('marmita_certa_config', JSON.stringify(configSistema));
+        }
+
+        function atualizarDisplaysConfig() {
+            const zapDisplay = document.getElementById('cardapio-zap-cozinha-display');
+            if (zapDisplay) zapDisplay.innerText = configSistema.cozinhaZap || 'Não cadastrado';
+            
+            const tagMotoboy = document.getElementById('motoboy-nome-tag');
+            if (tagMotoboy) tagMotoboy.innerText = `Entregador: ${configSistema.motoboyNome || 'Rodrigo'}`;
+
+            const inputDiaria = document.getElementById('motoboy-diaria-input');
+            if (inputDiaria) inputDiaria.value = configSistema.motoboyDiaria || 40;
+        }
+
+        // NOVO PEDIDO MANUAL
         function abrirModalNovoPedido() { document.getElementById('modal-novo-pedido').classList.remove('hidden'); }
         function fecharModalNovoPedido() { document.getElementById('modal-novo-pedido').classList.add('hidden'); }
         function alternarCamposPagamento() {
-            const statusForma = document.getElementById('pedido-forma-pagamento').value;
+            const forma = document.getElementById('pedido-forma-pagamento').value;
             const trocoContainer = document.getElementById('campo-troco-container');
-            if (statusForma === 'dinheiro') {
-                trocoContainer.classList.remove('hidden');
-            } else {
-                trocoContainer.classList.add('hidden');
-            }
+            if (forma === 'dinheiro') trocoContainer.classList.remove('hidden');
+            else trocoContainer.classList.add('hidden');
         }
         function atualizarValorSugeridoPedido() {
             const tam = document.getElementById('pedido-tamanho').value;
@@ -1219,62 +1528,12 @@ ${rotaUrl}
                 finalizadoEm: null
             };
             pedidos.unshift(novo);
-            localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+            salvarPedidos();
             tocarAlertaSonoro('pedido');
             fecharModalNovoPedido();
             renderizarKDS();
             if (abaAtiva === 'historico') renderizarHistorico();
             mostrarToast('Pedido Criado!', `Comanda #${novo.id} salva.`);
-        }
-
-        function simularPedidoWhatsApp() {
-            const nomes = ['Roberto Alcantara', 'Juliana Fernandes', 'Carlos Prado', 'Fernanda Lima'];
-            const pratos = ['Contrafilé Acebolado com Batata', 'Feijoada Completa com Couve', 'Frango Grelhado com Legumes'];
-            const ruas = ['Rua Copacabana, 320', 'Av. Brasil, 1150', 'Rua das Flores, 88'];
-            const pagtos = ['pix_pago', 'dinheiro', 'cartao', 'pix_pendente'];
-            const tamanhos = ['M', 'P', 'G'];
-            const tam = tamanhos[Math.floor(Math.random() * tamanhos.length)];
-            const val = tam === 'P' ? 10.00 : (tam === 'M' ? 20.00 : 30.00);
-
-            const novo = {
-                id: Math.floor(100 + Math.random() * 900),
-                cliente: nomes[Math.floor(Math.random() * nomes.length)],
-                telefone: '13999990000',
-                tamanho: tam,
-                itens: `1x Marmita ${tam} (${pratos[Math.floor(Math.random() * pratos.length)]})`,
-                endereco: ruas[Math.floor(Math.random() * ruas.length)],
-                formaPagamento: pagtos[Math.floor(Math.random() * pagtos.length)],
-                trocoPara: 50.00,
-                taxaMotoboy: 5.00,
-                valor: val,
-                status: 'pendente',
-                criadoEm: Date.now(),
-                finalizadoEm: null
-            };
-            pedidos.unshift(novo);
-            localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
-            tocarAlertaSonoro('pedido');
-            renderizarKDS();
-            if (abaAtiva === 'historico') renderizarHistorico();
-            mostrarToast('Novo Pedido Zap!', `Cliente ${novo.cliente} - Marmita ${tam}`);
-        }
-
-        function calcularFichas() {
-            const taxa = parseFloat(document.getElementById('taxa-fixa-select').value);
-            const pComida = 0.64 + 0.63 + 4.20; const pEmb = 0.70; const pFixo = (pComida + pEmb) * taxa; const pTotal = pComida + pEmb + pFixo;
-            document.getElementById('p-fixo-custo').innerText = `R$ ${pFixo.toFixed(2).replace('.', ',')}`;
-            document.getElementById('p-custo-total').innerText = `R$ ${pTotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('p-lucro-liquido').innerText = `R$ ${(10.00 - pTotal).toFixed(2).replace('.', ',')}`;
-
-            const mComida = 1.06 + 0.95 + 7.56; const mEmb = 0.87; const mFixo = (mComida + mEmb) * taxa; const mTotal = mComida + mEmb + mFixo;
-            document.getElementById('m-fixo-custo').innerText = `R$ ${mFixo.toFixed(2).replace('.', ',')}`;
-            document.getElementById('m-custo-total').innerText = `R$ ${mTotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('m-lucro-liquido').innerText = `R$ ${(20.00 - mTotal).toFixed(2).replace('.', ',')}`;
-
-            const gComida = 1.59 + 1.42 + 10.50; const gEmb = 1.10; const gFixo = (gComida + gEmb) * taxa; const gTotal = gComida + gEmb + gFixo;
-            document.getElementById('g-fixo-custo').innerText = `R$ ${gFixo.toFixed(2).replace('.', ',')}`;
-            document.getElementById('g-custo-total').innerText = `R$ ${gTotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('g-lucro-liquido').innerText = `R$ ${(30.00 - gTotal).toFixed(2).replace('.', ',')}`;
         }
 
         // FECHAMENTO & REPASSE 72 HORAS
@@ -1306,7 +1565,7 @@ ${rotaUrl}
             document.getElementById('fechamento-lucro-liquido').innerText = `R$ ${lucroLiquido.toFixed(2).replace('.', ',')}`;
             document.getElementById('fechamento-margem-media').innerText = `Margem Média: ${margem.toFixed(1)}%`;
 
-            const diaria = parseFloat(document.getElementById('motoboy-diaria-input').value) || 0;
+            const diaria = parseFloat(configSistema.motoboyDiaria) || 40;
             const totalTaxasHoje = entreguesHoje.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
             const totalServicoHoje = diaria + totalTaxasHoje;
             const dinheiroRecebidoRuaHoje = entreguesHoje.filter(p => p.formaPagamento === 'dinheiro').reduce((acc, curr) => acc + curr.valor, 0);
@@ -1343,13 +1602,15 @@ ${rotaUrl}
             inicioHoje.setHours(0, 0, 0, 0);
             const entreguesHoje = pedidos.filter(p => p.status === 'finalizado' && (p.finalizadoEm || p.criadoEm) >= inicioHoje.getTime());
             
-            const diaria = parseFloat(document.getElementById('motoboy-diaria-input').value) || 0;
+            const diaria = parseFloat(configSistema.motoboyDiaria) || 40;
             const totalTaxas = entreguesHoje.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
             const totalServico = diaria + totalTaxas;
             const dinheiroRua = entreguesHoje.filter(p => p.formaPagamento === 'dinheiro').reduce((acc, curr) => acc + curr.valor, 0);
             const saldoAcerto = dinheiroRua - totalServico;
 
             let msg = `*🏍️ MARMITA CERTA - FECHAMENTO DIÁRIO DO ENTREGADOR*
+`;
+            msg += `👤 Entregador: ${configSistema.motoboyNome || 'Rodrigo'}
 `;
             msg += `📅 Data: ${new Date().toLocaleDateString('pt-BR')}
 `;
@@ -1371,19 +1632,24 @@ ${rotaUrl}
             } else {
                 msg += `👉 *Acerto:* A cozinha repassa *R$ ${Math.abs(saldoAcerto).toFixed(2).replace('.', ',')}* ao motoboy.`;
             }
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+
+            const zapMotoboy = (configSistema.motoboyZap || '').replace(/\D/g, '');
+            const link = zapMotoboy ? `https://wa.me/55${zapMotoboy}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+            window.open(link, '_blank');
         }
 
         function gerarExtratoRepasse72hZap() {
             const agora = Date.now();
             const limite72h = agora - (72 * 60 * 60 * 1000);
             const entregues72h = pedidos.filter(p => p.status === 'finalizado' && (p.finalizadoEm || p.criadoEm) >= limite72h);
-            const diaria = parseFloat(document.getElementById('motoboy-diaria-input').value) || 0;
+            const diaria = parseFloat(configSistema.motoboyDiaria) || 40;
             const totalTaxas = entregues72h.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
             const totalDiarias = diaria * 3;
             const totalGeral = totalDiarias + totalTaxas;
 
             let msg = `*📊 MARMITA CERTA - EXTRATO DE REPASSE (CICLO DE 72 HORAS)*
+`;
+            msg += `👤 Entregador: ${configSistema.motoboyNome || 'Rodrigo'}
 `;
             msg += `📅 Período: Últimas 72 Horas (3 Dias)
 `;
@@ -1407,13 +1673,15 @@ ${rotaUrl}
 `;
             msg += `_Comprovante gerado automaticamente pela plataforma Marmita Certa._`;
 
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            const zapMotoboy = (configSistema.motoboyZap || '').replace(/\D/g, '');
+            const link = zapMotoboy ? `https://wa.me/55${zapMotoboy}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+            window.open(link, '_blank');
         }
 
         function excluirPedido(id) {
             if (confirm(`Deseja realmente excluir a comanda #${id}?`)) {
                 pedidos = pedidos.filter(item => item.id !== id);
-                localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+                salvarPedidos();
                 renderizarKDS();
                 if (abaAtiva === 'historico') renderizarHistorico();
                 if (abaAtiva === 'motoboy') renderizarVisaoMotoboy();
@@ -1427,7 +1695,7 @@ ${rotaUrl}
             if (concluidos.length === 0) return;
             if (confirm(`Deseja limpar as ${concluidos.length} comandas finalizadas da tela?`)) {
                 pedidos = pedidos.filter(p => p.status !== 'finalizado');
-                localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+                salvarPedidos();
                 renderizarKDS();
                 mostrarToast('Painel Limpo!', 'Comandas finalizadas arquivadas.');
             }
@@ -1437,79 +1705,12 @@ ${rotaUrl}
             if (pedidos.length === 0) return;
             if (confirm('⚠️ Deseja apagar TODOS os pedidos do histórico?')) {
                 pedidos = [];
-                localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+                salvarPedidos();
                 renderizarKDS();
                 renderizarHistorico();
                 if (abaAtiva === 'fechamento') calcularFechamento();
                 mostrarToast('Histórico Apagado', 'Todos os registros foram excluídos.', true);
             }
-        }
-
-        function previewUnitario() {
-            const qtd = parseFloat(document.getElementById('insumo-qtd').value);
-            const preco = parseFloat(document.getElementById('insumo-preco').value);
-            const un = document.getElementById('insumo-unidade').value;
-            if (!qtd || !preco) return;
-            let custoBase = un === 'kg' || un === 'L' ? preco / (qtd * 1000) : preco / qtd;
-            let baseNome = un === 'kg' || un === 'g' ? 'g' : (un === 'L' ? 'ml' : 'un');
-            document.getElementById('insumo-preview-calc').innerText = `R$ ${custoBase.toFixed(4).replace('.', ',')} / ${baseNome}`;
-        }
-
-        function salvarInsumo(e) {
-            e.preventDefault();
-            const qtd = parseFloat(document.getElementById('insumo-qtd').value);
-            const preco = parseFloat(document.getElementById('insumo-preco').value);
-            const un = document.getElementById('insumo-unidade').value;
-            let custoBase = un === 'kg' || un === 'L' ? preco / (qtd * 1000) : preco / qtd;
-            let baseNome = un === 'kg' || un === 'g' ? 'g' : (un === 'L' ? 'ml' : 'un');
-
-            const item = {
-                id: Date.now(),
-                categoria: document.querySelector('input[name="categoria"]:checked').value,
-                nome: document.getElementById('insumo-nome').value.trim(),
-                quantidade: qtd,
-                unidade: un,
-                preco: preco,
-                precoPorBase: custoBase,
-                unidadeBase: baseNome
-            };
-            insumos.unshift(item);
-            localStorage.setItem('marmita_certa_insumos', JSON.stringify(insumos));
-            document.getElementById('form-insumo').reset();
-            renderizarTabelaInsumos();
-            mostrarToast('Insumo Salvo!', `"${item.nome}" cadastrado.`);
-        }
-
-        function renderizarTabelaInsumos() {
-            const corpo = document.getElementById('tabela-insumos-body');
-            corpo.innerHTML = insumos.map(i => `
-                <tr class="hover:bg-orange-50/40 dark:hover:bg-brandCharcoal/60">
-                    <td class="py-3 px-4 font-bold text-brandCharcoal dark:text-white">${i.nome}</td>
-                    <td class="py-3 px-3">${i.quantidade} ${i.unidade}</td>
-                    <td class="py-3 px-3 font-bold">R$ ${i.preco.toFixed(2).replace('.', ',')}</td>
-                    <td class="py-3 px-3 text-brandOrange font-black">R$ ${i.precoPorBase.toFixed(4).replace('.', ',')}/${i.unidadeBase}</td>
-                    <td class="py-3 px-3 text-center">
-                        <button onclick="excluirInsumo(${i.id})" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function excluirInsumo(id) {
-            insumos = insumos.filter(i => i.id !== id);
-            localStorage.setItem('marmita_certa_insumos', JSON.stringify(insumos));
-            renderizarTabelaInsumos();
-        }
-
-        function prefillExemplosInsumos() {
-            insumos = [
-                { id: 1, categoria: 'Alimento', nome: 'Arroz Tipo 1', quantidade: 5, unidade: 'kg', preco: 26.50, precoPorBase: 26.50/5000, unidadeBase: 'g' },
-                { id: 2, categoria: 'Alimento', nome: 'Feijão Carioca', quantidade: 1, unidade: 'kg', preco: 7.90, precoPorBase: 7.90/1000, unidadeBase: 'g' },
-                { id: 3, categoria: 'Alimento', nome: 'Contrafilé Bife', quantidade: 1, unidade: 'kg', preco: 42.00, precoPorBase: 42.00/1000, unidadeBase: 'g' },
-                { id: 4, categoria: 'Embalagem', nome: 'Marmita M (M500)', quantidade: 100, unidade: 'un', preco: 62.00, precoPorBase: 0.62, unidadeBase: 'un' }
-            ];
-            localStorage.setItem('marmita_certa_insumos', JSON.stringify(insumos));
-            renderizarTabelaInsumos();
         }
 
         function alternarModoEscuro() {
@@ -1553,7 +1754,8 @@ ${rotaUrl}
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon').className = 'fa-solid fa-sun text-amber-400';
             }
-            if (insumos.length === 0) prefillExemplosInsumos();
+            atualizarDisplaysConfig();
+            atualizarResumoCardapio();
             renderizarKDS();
         });
     </script>
@@ -1589,12 +1791,12 @@ ${rotaUrl}
                 <button onclick="recusarCorridaMotoboy()" class="py-3.5 px-4 rounded-2xl bg-gray-100 hover:bg-gray-200 dark:bg-brandDarkBorder text-gray-700 dark:text-gray-200 font-black text-xs btn-press transition">
                     ❌ Recusar
                 </button>
-                <button onclick="aceitarCorridaMotoboy()" class="py-3.5 px-4 rounded-2xl bg-brandGreen hover:bg-emerald-700 text-white font-black text-xs btn-press shadow-lg shadow-emerald-500/30 transition flex items-center justify-center gap-1.5">
+                <button onclick="aceitarCorridaMotoboy()" class="py-3.5 px-4 rounded-2xl bg-brandSuccess hover:bg-emerald-700 text-white font-black text-xs btn-press shadow-lg shadow-emerald-500/30 transition flex items-center justify-center gap-1.5">
                     <i class="fa-solid fa-check text-sm"></i> Aceitar Corrida
                 </button>
             </div>
             
-            <p class="text-[10px] text-gray-400">O alarme tocará continuamente até que você responda.</p>
+            <p class="text-[10px] text-gray-400">O alarme tocará a cada 6,5s até você responder.</p>
         </div>
     </div>
 
