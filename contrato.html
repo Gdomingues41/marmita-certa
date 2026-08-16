@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marmita Certa - Contrato Digital de Adesão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOrange: '#F36A21',
+                        brandOrangeDark: '#D85612',
+                        brandCharcoal: '#2B2B2B',
+                        brandCream: '#F5E9D6',
+                        brandGreen: '#00A86B'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        .doc-page { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        #signature-pad { touch-action: none; cursor: crosshair; }
+    </style>
+</head>
+<body class="bg-gray-100 text-brandCharcoal antialiased min-h-screen py-6 px-4">
+
+    <div class="max-w-4xl mx-auto mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <img src="logo_marmita.png" alt="Marmita Certa" class="w-10 h-10 rounded-full object-cover border-2 border-brandOrange shadow-sm">
+            <div>
+                <h1 class="text-xl font-black text-brandCharcoal leading-tight">Marmita <span class="text-brandOrange">Certa</span></h1>
+                <p class="text-xs text-gray-500 font-bold">Emissão de Termo de Adesão & Assinatura Digital</p>
+            </div>
+        </div>
+        <a href="index.html" class="text-xs font-bold text-gray-500 hover:text-brandOrange flex items-center gap-1 transition">
+            <i class="fa-solid fa-arrow-left"></i> Voltar à Home
+        </a>
+    </div>
+
+    <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Formulário Esquerdo -->
+        <div class="lg:col-span-5 space-y-4">
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                <div class="pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-sm font-black text-brandCharcoal flex items-center gap-2">
+                        <i class="fa-solid fa-file-signature text-brandOrange"></i> Dados do Proponente
+                    </h2>
+                    <span class="text-[10px] bg-orange-100 text-brandOrange font-bold px-2 py-0.5 rounded-full">Passo 1</span>
+                </div>
+
+                <div class="space-y-3 text-xs font-bold">
+                    <div>
+                        <label class="block uppercase mb-1 text-gray-600">Nome do Estabelecimento / Fantasia</label>
+                        <input type="text" id="in-comercio" value="Marmitaria Sabor de Casa" oninput="atualizarContrato()" 
+                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                    </div>
+
+                    <div>
+                        <label class="block uppercase mb-1 text-gray-600">Nome do Responsável Legal</label>
+                        <input type="text" id="in-responsavel" value="Neusa Aparecida da Silva" oninput="atualizarContrato()" 
+                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block uppercase mb-1 text-gray-600">CPF ou CNPJ</label>
+                            <input type="text" id="in-documento" value="123.456.789-00" oninput="atualizarContrato()" 
+                                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                        </div>
+                        <div>
+                            <label class="block uppercase mb-1 text-gray-600">Cidade / UF</label>
+                            <input type="text" id="in-cidade" value="Tatuí - SP" oninput="atualizarContrato()" 
+                                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block uppercase mb-1 text-gray-600">WhatsApp do Estabelecimento</label>
+                        <input type="tel" id="in-whatsapp" value="(15) 99876-5432" oninput="atualizarContrato()" 
+                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                    </div>
+
+                    <div class="p-3 bg-orange-50 rounded-xl border border-orange-200 space-y-2">
+                        <label class="block uppercase text-[11px] text-brandOrange font-black">Valores Acordados</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <span class="text-[10px] text-gray-600 block">Implantação Única (R$)</span>
+                                <input type="number" id="in-implantacao" value="150.00" step="10.00" oninput="atualizarContrato()" 
+                                    class="w-full px-2.5 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-black text-brandCharcoal">
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-gray-600 block">Mensalidade Suporte (R$)</span>
+                                <input type="number" id="in-mensalidade" value="49.00" step="5.00" oninput="atualizarContrato()" 
+                                    class="w-full px-2.5 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-black text-brandGreen">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assinatura -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                <div class="flex items-center justify-between pb-1">
+                    <h3 class="text-xs font-black text-brandCharcoal flex items-center gap-1.5">
+                        <i class="fa-solid fa-pen-nib text-brandOrange"></i> Assinatura na Tela (com o dedo)
+                    </h3>
+                    <button onclick="limparAssinatura()" class="text-[11px] font-bold text-red-500 hover:text-red-700 transition">
+                        <i class="fa-solid fa-eraser"></i> Limpar
+                    </button>
+                </div>
+                <div class="border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 overflow-hidden relative">
+                    <canvas id="signature-pad" width="340" height="130" class="w-full block"></canvas>
+                    <span id="signature-hint" class="absolute inset-0 flex items-center justify-center text-[11px] text-gray-400 font-bold pointer-events-none">
+                        ✍️ Desenhe sua assinatura aqui
+                    </span>
+                </div>
+                <button onclick="gerarECompartilharPDF()" class="w-full bg-brandGreen hover:bg-emerald-700 text-white font-black py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-pdf text-base"></i> Finalizar & Gerar Contrato PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- Visualizador A4 Direito -->
+        <div class="lg:col-span-7">
+            <div class="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 doc-page space-y-5 text-gray-800 text-xs" id="documento-impresso">
+                <div class="flex items-center justify-between border-b-2 border-brandOrange pb-4">
+                    <div class="flex items-center gap-3">
+                        <img src="logo_marmita.png" alt="Marmita Certa" class="w-12 h-12 rounded-full object-cover border-2 border-brandOrange">
+                        <div>
+                            <h2 class="text-base font-black text-brandCharcoal uppercase tracking-wide">Marmita <span class="text-brandOrange">Certa</span></h2>
+                            <p class="text-[10px] text-gray-500 font-bold">TERMO DE ADESÃO E PRESTAÇÃO DE SERVIÇOS DE SOFTWARE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[9px] font-bold bg-gray-100 text-gray-600 px-2 py-1 rounded-md block uppercase" id="doc-protocolo">#MC-2026-0816</span>
+                        <span class="text-[10px] text-gray-500 font-semibold block mt-1" id="doc-data-emissao">16/08/2026</span>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-3.5 rounded-xl space-y-2 border border-gray-200">
+                    <div>
+                        <strong class="text-brandCharcoal font-extrabold block text-[11px] uppercase">Contratado (Desenvolvedor / Suporte):</strong>
+                        <p class="text-[11px] text-gray-600">Gabriel Domingues • WhatsApp: (13) 98860-9662 • Plataforma Marmita Certa</p>
+                    </div>
+                    <div class="pt-1.5 border-t border-gray-200">
+                        <strong class="text-brandCharcoal font-extrabold block text-[11px] uppercase">Contratante (Estabelecimento):</strong>
+                        <p class="text-[11px] text-gray-700">
+                            <span id="doc-comercio" class="font-bold">Marmitaria Sabor de Casa</span> — Resp: <span id="doc-responsavel">Neusa Aparecida da Silva</span><br>
+                            Doc: <span id="doc-documento">123.456.789-00</span> • Cidade: <span id="doc-cidade">Tatuí - SP</span> • Tel: <span id="doc-whatsapp">(15) 99876-5432</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5 text-[11px] leading-relaxed text-gray-700">
+                    <p>
+                        <strong>1. OBJETO:</strong> O CONTRATADO disponibiliza a licença de uso do sistema web <strong>Marmita Certa</strong>, incluindo módulo KDS de cozinha, cálculo de ficha técnica, despacho com rotas integradas via WhatsApp e fechamento de caixa diário.
+                    </p>
+                    <p>
+                        <strong>2. CONFIGURAÇÃO & IMPLANTAÇÃO:</strong> A taxa única de implantação de <strong>R$ <span id="doc-val-implantacao" class="font-bold text-brandCharcoal">150,00</span></strong> contempla o cadastro do cardápio inicial, configuração de faixas de entrega e orientação operacional da equipe.
+                    </p>
+                    <p>
+                        <strong>3. SUPORTE & MANUTENÇÃO:</strong> A mensalidade de <strong>R$ <span id="doc-val-mensalidade" class="font-bold text-brandGreen">49,00</span></strong> garante a hospedagem contínua, backups e atendimento de suporte via WhatsApp, sem período de fidelidade ou multa rescisória.
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-gray-200 mt-4">
+                    <div class="flex flex-col items-center justify-center space-y-1">
+                        <div class="h-16 flex items-center justify-center">
+                            <img id="doc-img-assinatura" src="" class="max-h-16 hidden" alt="Assinatura Digital">
+                            <span id="doc-sem-assinatura" class="text-[10px] text-gray-400 italic">[Aguardando assinatura digital no quadro ao lado]</span>
+                        </div>
+                        <div class="w-64 border-t border-gray-800 text-center pt-1">
+                            <p class="text-[11px] font-black text-brandCharcoal" id="doc-assina-nome">Neusa Aparecida da Silva</p>
+                            <p class="text-[9px] text-gray-500 uppercase tracking-wider">Assinado Eletrônica e Digitalmente</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2 text-center text-[8px] text-gray-400 border-t border-gray-100">
+                    Documento emitido nos termos da MP nº 2.200-2/2001 e Lei 14.063/2020. Autenticidade garantida via aceite eletrônico.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('signature-pad');
+        const ctx = canvas.getContext('2d');
+        let desenhando = false;
+        let temAssinatura = false;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        }
+
+        function iniciarDesenho(e) {
+            e.preventDefault();
+            desenhando = true;
+            temAssinatura = true;
+            document.getElementById('signature-hint').classList.add('hidden');
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        }
+
+        function desenhar(e) {
+            if (!desenhando) return;
+            e.preventDefault();
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            atualizarImagemAssinatura();
+        }
+
+        function pararDesenho() { desenhando = false; }
+
+        canvas.addEventListener('mousedown', iniciarDesenho);
+        canvas.addEventListener('mousemove', desenhar);
+        canvas.addEventListener('mouseup', pararDesenho);
+        canvas.addEventListener('mouseleave', pararDesenho);
+
+        canvas.addEventListener('touchstart', iniciarDesenho, { passive: false });
+        canvas.addEventListener('touchmove', desenhar, { passive: false });
+        canvas.addEventListener('touchend', pararDesenho);
+
+        function limparAssinatura() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            temAssinatura = false;
+            document.getElementById('signature-hint').classList.remove('hidden');
+            document.getElementById('doc-img-assinatura').classList.add('hidden');
+            document.getElementById('doc-sem-assinatura').classList.remove('hidden');
+        }
+
+        function atualizarImagemAssinatura() {
+            const dataUrl = canvas.toDataURL('image/png');
+            const img = document.getElementById('doc-img-assinatura');
+            img.src = dataUrl;
+            img.classList.remove('hidden');
+            document.getElementById('doc-sem-assinatura').classList.add('hidden');
+        }
+
+        function atualizarContrato() {
+            const comercio = document.getElementById('in-comercio').value || 'Nome do Estabelecimento';
+            const responsavel = document.getElementById('in-responsavel').value || 'Nome do Responsável';
+            const documento = document.getElementById('in-documento').value || '000.000.000-00';
+            const cidade = document.getElementById('in-cidade').value || 'Cidade - UF';
+            const zap = document.getElementById('in-whatsapp').value || '(00) 00000-0000';
+            const imp = parseFloat(document.getElementById('in-implantacao').value) || 0;
+            const men = parseFloat(document.getElementById('in-mensalidade').value) || 0;
+
+            document.getElementById('doc-comercio').innerText = comercio;
+            document.getElementById('doc-responsavel').innerText = responsavel;
+            document.getElementById('doc-documento').innerText = documento;
+            document.getElementById('doc-cidade').innerText = cidade;
+            document.getElementById('doc-whatsapp').innerText = zap;
+            document.getElementById('doc-assina-nome').innerText = responsavel;
+            document.getElementById('doc-val-implantacao').innerText = imp.toFixed(2).replace('.', ',');
+            document.getElementById('doc-val-mensalidade').innerText = men.toFixed(2).replace('.', ',');
+        }
+
+        function gerarECompartilharPDF() {
+            if (!temAssinatura) {
+                alert("Por favor, colha a assinatura do cliente com o dedo no quadro antes de gerar o PDF.");
+                return;
+            }
+
+            const elemento = document.getElementById('documento-impresso');
+            const nomeArquivo = `Contrato_MarmitaCerta_${document.getElementById('in-comercio').value.replace(/\s+/g, '_')}.pdf`;
+
+            const opcoes = {
+                margin: 8,
+                filename: nomeArquivo,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opcoes).from(elemento).save().then(() => {
+                const zapCliente = document.getElementById('in-whatsapp').value.replace(/\D/g, '');
+                const nomeComercio = document.getElementById('in-comercio').value;
+                const msg = `Olá! Acabamos de emitir o Termo de Adesão do *Marmita Certa* para o ${nomeComercio}. O PDF foi gerado com sucesso!`;
+                const linkZap = zapCliente ? `https://wa.me/55${zapCliente}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+                
+                if (confirm("Contrato PDF gerado com sucesso! Deseja abrir o WhatsApp para enviar a mensagem de confirmação para o cliente?")) {
+                    window.open(linkZap, '_blank');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hoje = new Date();
+            document.getElementById('doc-data-emissao').innerText = hoje.toLocaleDateString('pt-BR');
+            const prot = `#MC-${hoje.getFullYear()}-${(hoje.getMonth()+1).toString().padStart(2,'0')}${hoje.getDate().toString().padStart(2,'0')}`;
+            document.getElementById('doc-protocolo').innerText = prot;
+            atualizarContrato();
+        });
+    </script>
+</body>
+</html>

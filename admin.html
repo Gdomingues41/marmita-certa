@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marmita Certa - Painel do Gestor & Repasses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOrange: '#F36A21',
+                        brandOrangeDark: '#D85612',
+                        brandCharcoal: '#2B2B2B',
+                        brandCream: '#F5E9D6',
+                        brandGreen: '#00A86B'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        .btn-press:active { transform: scale(0.97); }
+    </style>
+</head>
+<body class="bg-gray-100 text-brandCharcoal min-h-screen py-6 px-4">
+
+    <div class="max-w-6xl mx-auto mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <img src="logo_marmita.png" alt="Marmita Certa" class="w-10 h-10 rounded-full object-cover border-2 border-brandOrange shadow-sm">
+            <div>
+                <h1 class="text-xl font-black text-brandCharcoal leading-tight">Marmita <span class="text-brandOrange">Certa</span> • Gestão</h1>
+                <p class="text-xs text-gray-500 font-bold">Controle de Implantações, Clientes & Repasses do Parceiro (Tatuí)</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="contrato.html" target="_blank" class="bg-brandOrange hover:bg-brandOrangeDark text-white text-xs font-black px-3.5 py-2 rounded-xl transition btn-press flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-file-signature"></i> Novo Contrato Digital
+            </a>
+            <a href="sistema.html" target="_blank" class="bg-gray-800 hover:bg-black text-white text-xs font-black px-3.5 py-2 rounded-xl transition btn-press flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-desktop"></i> Ver KDS
+            </a>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto space-y-6">
+        <!-- Indicadores -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <span class="text-[10px] font-black uppercase tracking-wider text-gray-400">Total de Clientes</span>
+                <h3 id="card-total-clientes" class="text-2xl font-black text-brandCharcoal mt-1">0</h3>
+                <p class="text-[11px] text-gray-500 mt-0.5">Marmitarias & Lanchonetes</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <span class="text-[10px] font-black uppercase tracking-wider text-gray-400">Faturamento Bruto</span>
+                <h3 id="card-faturamento-total" class="text-2xl font-black text-brandOrange mt-1">R$ 0,00</h3>
+                <p class="text-[11px] text-gray-500 mt-0.5">Entrada das implantações</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border-2 border-emerald-500 shadow-sm bg-emerald-50/20">
+                <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800">Repasses p/ o Parceiro (Irmão)</span>
+                <h3 id="card-comissao-total" class="text-2xl font-black text-emerald-600 mt-1">R$ 0,00</h3>
+                <p class="text-[11px] text-emerald-700 font-bold mt-0.5">100% da adesão repassada</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <span class="text-[10px] font-black uppercase tracking-wider text-gray-400">Mensalidade Prevista</span>
+                <h3 id="card-mensalidade-total" class="text-2xl font-black text-blue-600 mt-1">R$ 0,00/mês</h3>
+                <p class="text-[11px] text-gray-500 mt-0.5">Recorrente a partir do 2º mês</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Cadastro -->
+            <div class="lg:col-span-4 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                <div class="pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-xs font-black uppercase text-brandCharcoal flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus-circle text-brandOrange"></i> Cadastrar Estabelecimento
+                    </h2>
+                </div>
+
+                <form onsubmit="cadastrarCliente(event)" class="space-y-3 text-xs font-bold">
+                    <div>
+                        <label class="block uppercase mb-1 text-gray-600">Nome do Estabelecimento</label>
+                        <input type="text" id="adm-nome" required placeholder="Ex: Marmitaria Sabor de Casa" 
+                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                    </div>
+
+                    <div>
+                        <label class="block uppercase mb-1 text-gray-600">Dono / Responsável</label>
+                        <input type="text" id="adm-dono" required placeholder="Ex: Neusa Silva" 
+                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block uppercase mb-1 text-gray-600">Cidade</label>
+                            <input type="text" id="adm-cidade" value="Tatuí - SP" required 
+                                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                        </div>
+                        <div>
+                            <label class="block uppercase mb-1 text-gray-600">WhatsApp</label>
+                            <input type="tel" id="adm-whatsapp" required placeholder="15998765432" 
+                                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block uppercase mb-1 text-gray-600">Valor Implantação (R$)</label>
+                            <input type="number" id="adm-implantacao" value="150.00" step="10.00" required 
+                                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none font-black text-brandOrange">
+                        </div>
+                        <div>
+                            <label class="block uppercase mb-1 text-gray-600">Repasse Irmão (R$)</label>
+                            <input type="number" id="adm-repasse" value="150.00" step="10.00" required 
+                                class="w-full px-3 py-2 bg-emerald-50 border border-emerald-300 rounded-xl outline-none font-black text-emerald-600">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block uppercase mb-1 text-gray-600">Mensalidade Suporte (R$)</label>
+                        <input type="number" id="adm-mensalidade" value="49.00" step="5.00" required 
+                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none font-bold text-blue-600">
+                    </div>
+
+                    <div>
+                        <label class="block uppercase mb-1 text-gray-600">Status do Pagamento</label>
+                        <select id="adm-status-pgto" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none font-bold">
+                            <option value="pago">🟢 Cliente Já Pagou</option>
+                            <option value="pendente">🟡 Pagamento Pendente</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brandOrange hover:bg-brandOrangeDark text-white font-black py-3 rounded-xl shadow-md transition btn-press flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check"></i> Salvar Estabelecimento
+                    </button>
+                </form>
+            </div>
+
+            <!-- Tabela -->
+            <div class="lg:col-span-8 space-y-4">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <h3 class="font-extrabold text-sm text-brandCharcoal">Estabelecimentos & Repasses</h3>
+                            <p class="text-[11px] text-gray-400">Controle se a comissão já foi repassada para o seu irmão.</p>
+                        </div>
+                        <button onclick="gerarExtratoZapIrmao()" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-3.5 py-2 rounded-xl transition btn-press flex items-center gap-1.5 self-start sm:self-auto shadow-xs">
+                            <i class="fa-brands fa-whatsapp"></i> Extrato de Repasse no Zap
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50 text-[10px] font-black text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                                    <th class="py-3 px-4">Estabelecimento</th>
+                                    <th class="py-3 px-3">Implantação</th>
+                                    <th class="py-3 px-3">Repasse Irmão</th>
+                                    <th class="py-3 px-3">Status Repasse</th>
+                                    <th class="py-3 px-4 text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-clientes-corpo" class="divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="empty-state-adm" class="p-8 text-center hidden">
+                        <i class="fa-solid fa-store text-3xl text-gray-300 mb-2"></i>
+                        <p class="text-xs text-gray-400 font-bold">Nenhum estabelecimento cadastrado ainda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let clientes = JSON.parse(localStorage.getItem('marmita_certa_admin_clientes')) || [
+            {
+                id: 1,
+                nome: 'Marmitaria Sabor de Casa',
+                dono: 'Neusa Silva',
+                cidade: 'Tatuí - SP',
+                whatsapp: '15998765432',
+                implantacao: 150.00,
+                repasseIrmao: 150.00,
+                mensalidade: 49.00,
+                statusCliente: 'pago',
+                statusRepasse: 'pendente',
+                cadastradoEm: '16/08/2026'
+            }
+        ];
+
+        function salvarLocal() {
+            localStorage.setItem('marmita_certa_admin_clientes', JSON.stringify(clientes));
+            renderizar();
+        }
+
+        function cadastrarCliente(e) {
+            e.preventDefault();
+            const novo = {
+                id: Date.now(),
+                nome: document.getElementById('adm-nome').value.trim(),
+                dono: document.getElementById('adm-dono').value.trim(),
+                cidade: document.getElementById('adm-cidade').value.trim(),
+                whatsapp: document.getElementById('adm-whatsapp').value.replace(/\D/g, ''),
+                implantacao: parseFloat(document.getElementById('adm-implantacao').value) || 0,
+                repasseIrmao: parseFloat(document.getElementById('adm-repasse').value) || 0,
+                mensalidade: parseFloat(document.getElementById('adm-mensalidade').value) || 0,
+                statusCliente: document.getElementById('adm-status-pgto').value,
+                statusRepasse: 'pendente',
+                cadastradoEm: new Date().toLocaleDateString('pt-BR')
+            };
+
+            clientes.unshift(novo);
+            salvarLocal();
+            document.querySelector('form').reset();
+            document.getElementById('adm-cidade').value = 'Tatuí - SP';
+            document.getElementById('adm-implantacao').value = '150.00';
+            document.getElementById('adm-repasse').value = '150.00';
+            document.getElementById('adm-mensalidade').value = '49.00';
+        }
+
+        function alternarStatusRepasse(id) {
+            clientes = clientes.map(c => {
+                if (c.id === id) {
+                    return { ...c, statusRepasse: c.statusRepasse === 'pendente' ? 'repassado' : 'pendente' };
+                }
+                return c;
+            });
+            salvarLocal();
+        }
+
+        function excluirCliente(id) {
+            if (confirm("Deseja remover este estabelecimento da lista?")) {
+                clientes = clientes.filter(c => c.id !== id);
+                salvarLocal();
+            }
+        }
+
+        function renderizar() {
+            const corpo = document.getElementById('tabela-clientes-corpo');
+            const empty = document.getElementById('empty-state-adm');
+            corpo.innerHTML = '';
+
+            let totalImplantacao = 0;
+            let totalRepasse = 0;
+            let totalMensalidade = 0;
+
+            if (clientes.length === 0) {
+                empty.classList.remove('hidden');
+            } else {
+                empty.classList.add('hidden');
+                clientes.forEach(c => {
+                    totalImplantacao += c.implantacao;
+                    totalRepasse += c.repasseIrmao;
+                    totalMensalidade += c.mensalidade;
+
+                    const statusRepasseBadge = c.statusRepasse === 'repassado' 
+                        ? `<span class="bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded-md text-[10px]"><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>Pago ao Irmão</span>`
+                        : `<span class="bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded-md text-[10px]"><i class="fa-solid fa-clock text-amber-600 mr-1"></i>Pendente Repasse</span>`;
+
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-orange-50/40 transition";
+                    row.innerHTML = `
+                        <td class="py-3 px-4">
+                            <p class="font-extrabold text-brandCharcoal text-xs">${c.nome}</p>
+                            <p class="text-[10px] text-gray-400">${c.dono} • ${c.cidade} • ${c.whatsapp}</p>
+                        </td>
+                        <td class="py-3 px-3 font-black text-brandCharcoal">R$ ${c.implantacao.toFixed(2).replace('.', ',')}</td>
+                        <td class="py-3 px-3 font-black text-emerald-600">R$ ${c.repasseIrmao.toFixed(2).replace('.', ',')}</td>
+                        <td class="py-3 px-3">${statusRepasseBadge}</td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex items-center justify-center gap-1.5">
+                                <button onclick="alternarStatusRepasse(${c.id})" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-[10px] font-bold transition btn-press">
+                                    ${c.statusRepasse === 'pendente' ? 'Marcar Repassado' : 'Marcar Pendente'}
+                                </button>
+                                <button onclick="excluirCliente(${c.id})" class="text-gray-300 hover:text-red-500 p-1 rounded transition">
+                                    <i class="fa-solid fa-trash-can text-xs"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    corpo.appendChild(row);
+                });
+            }
+
+            document.getElementById('card-total-clientes').innerText = clientes.length;
+            document.getElementById('card-faturamento-total').innerText = `R$ ${totalImplantacao.toFixed(2).replace('.', ',')}`;
+            document.getElementById('card-comissao-total').innerText = `R$ ${totalRepasse.toFixed(2).replace('.', ',')}`;
+            document.getElementById('card-mensalidade-total').innerText = `R$ ${totalMensalidade.toFixed(2).replace('.', ',')}/mês`;
+        }
+
+        function gerarExtratoZapIrmao() {
+            const pendentes = clientes.filter(c => c.statusRepasse === 'pendente');
+            const totalPendente = pendentes.reduce((acc, curr) => acc + curr.repasseIrmao, 0);
+            const totalGeral = clientes.reduce((acc, curr) => acc + curr.repasseIrmao, 0);
+
+            let msg = `*📊 MARMITA CERTA - EXTRATO DE REPASSES (TATUÍ)*\n`;
+            msg += `📅 Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
+            msg += `----------------------------------------\n`;
+            msg += `• Total de Comércios Fechados: ${clientes.length}\n`;
+            msg += `💰 *Total Acumulado das Vendas:* R$ ${totalGeral.toFixed(2).replace('.', ',')}\n`;
+            msg += `👉 *Saldo Disponível p/ Repasse (Pendente):* R$ ${totalPendente.toFixed(2).replace('.', ',')}\n`;
+            msg += `----------------------------------------\n`;
+            msg += `*Lista de Clientes:*\n`;
+            clientes.forEach((c, idx) => {
+                const st = c.statusRepasse === 'repassado' ? '✅ Repassado' : '🟡 A Repassar';
+                msg += `${idx+1}. ${c.nome} -> R$ ${c.repasseIrmao.toFixed(2).replace('.', ',')} (${st})\n`;
+            });
+            msg += `\n_Bora pra cima fechar mais comércios hoje!_`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderizar);
+    </script>
+</body>
+</html>
