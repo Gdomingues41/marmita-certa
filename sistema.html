@@ -722,10 +722,11 @@
                     audioMotoboy.currentTime = 0;
                     audioMotoboy.play().catch(e => console.warn(e));
                     if (!intervalAudioMotoboy) {
+                        // Intervalo ajustado para 6,5 segundos (6500ms) para respirar entre os toques
                         intervalAudioMotoboy = setInterval(() => {
                             audioMotoboy.currentTime = 0;
                             audioMotoboy.play().catch(e => console.warn(e));
-                        }, 2500);
+                        }, 6500);
                     }
                 }
             } catch (err) {
@@ -902,17 +903,31 @@
 
             const rotaUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.endereco)}`;
 
-            let msg = `🛵 *NOVA CORRIDA • MARMITA CERTA*\n`;
-            msg += `----------------------------------------\n`;
-            msg += `📦 *Pedido:* #${p.id} (${p.cliente})\n`;
-            msg += `📍 *Endereço:* ${p.endereco}\n`;
-            msg += `📞 *Tel/Zap Cliente:* ${p.telefone || 'Não informado'}\n`;
-            msg += `🍲 *Itens:* ${p.itens}\n`;
-            msg += `💵 *SEU GANHO NESTA CORRIDA:* R$ ${p.taxaMotoboy.toFixed(2).replace('.', ',')}\n`;
-            msg += `----------------------------------------\n`;
-            msg += `👉 *COMO RECEBER:*\n*${textoCobranca}*\n`;
-            msg += `----------------------------------------\n`;
-            msg += `🗺️ *Abrir GPS / Google Maps:*\n${rotaUrl}\n\n`;
+            let msg = `🛵 *NOVA CORRIDA • MARMITA CERTA*
+`;
+            msg += `----------------------------------------
+`;
+            msg += `📦 *Pedido:* #${p.id} (${p.cliente})
+`;
+            msg += `📍 *Endereço:* ${p.endereco}
+`;
+            msg += `📞 *Tel/Zap Cliente:* ${p.telefone || 'Não informado'}
+`;
+            msg += `🍲 *Itens:* ${p.itens}
+`;
+            msg += `💵 *SEU GANHO NESTA CORRIDA:* R$ ${p.taxaMotoboy.toFixed(2).replace('.', ',')}
+`;
+            msg += `----------------------------------------
+`;
+            msg += `👉 *COMO RECEBER:*
+*${textoCobranca}*
+`;
+            msg += `----------------------------------------
+`;
+            msg += `🗺️ *Abrir GPS / Google Maps:*
+${rotaUrl}
+
+`;
             msg += `_Favor confirmar no sistema ou responder aqui ao entregar!_`;
 
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1171,9 +1186,9 @@
         function abrirModalNovoPedido() { document.getElementById('modal-novo-pedido').classList.remove('hidden'); }
         function fecharModalNovoPedido() { document.getElementById('modal-novo-pedido').classList.add('hidden'); }
         function alternarCamposPagamento() {
-            const forma = document.getElementById('pedido-forma-pagamento').value;
+            const statusForma = document.getElementById('pedido-forma-pagamento').value;
             const trocoContainer = document.getElementById('campo-troco-container');
-            if (forma === 'dinheiro') {
+            if (statusForma === 'dinheiro') {
                 trocoContainer.classList.remove('hidden');
             } else {
                 trocoContainer.classList.add('hidden');
@@ -1334,14 +1349,23 @@
             const dinheiroRua = entreguesHoje.filter(p => p.formaPagamento === 'dinheiro').reduce((acc, curr) => acc + curr.valor, 0);
             const saldoAcerto = dinheiroRua - totalServico;
 
-            let msg = `*🏍️ MARMITA CERTA - FECHAMENTO DIÁRIO DO ENTREGADOR*\n`;
-            msg += `📅 Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
-            msg += `----------------------------------------\n`;
-            msg += `• Diária Fixa (Hoje): R$ ${diaria.toFixed(2).replace('.', ',')}\n`;
-            msg += `• Taxas de Corridas (${entreguesHoje.length}): R$ ${totalTaxas.toFixed(2).replace('.', ',')}\n`;
-            msg += `💰 *Total Ganho pelo Serviço:* R$ ${totalServico.toFixed(2).replace('.', ',')}\n\n`;
-            msg += `💵 *Dinheiro recebido em mãos (Rua):* R$ ${dinheiroRua.toFixed(2).replace('.', ',')}\n`;
-            msg += `----------------------------------------\n`;
+            let msg = `*🏍️ MARMITA CERTA - FECHAMENTO DIÁRIO DO ENTREGADOR*
+`;
+            msg += `📅 Data: ${new Date().toLocaleDateString('pt-BR')}
+`;
+            msg += `----------------------------------------
+`;
+            msg += `• Diária Fixa (Hoje): R$ ${diaria.toFixed(2).replace('.', ',')}
+`;
+            msg += `• Taxas de Corridas (${entreguesHoje.length}): R$ ${totalTaxas.toFixed(2).replace('.', ',')}
+`;
+            msg += `💰 *Total Ganho pelo Serviço:* R$ ${totalServico.toFixed(2).replace('.', ',')}
+
+`;
+            msg += `💵 *Dinheiro recebido em mãos (Rua):* R$ ${dinheiroRua.toFixed(2).replace('.', ',')}
+`;
+            msg += `----------------------------------------
+`;
             if (saldoAcerto > 0) {
                 msg += `👉 *Acerto:* O motoboy repassa *R$ ${saldoAcerto.toFixed(2).replace('.', ',')}* para a cozinha.`;
             } else {
@@ -1359,17 +1383,28 @@
             const totalDiarias = diaria * 3;
             const totalGeral = totalDiarias + totalTaxas;
 
-            let msg = `*📊 MARMITA CERTA - EXTRATO DE REPASSE (CICLO DE 72 HORAS)*\n`;
-            msg += `📅 Período: Últimas 72 Horas (3 Dias)\n`;
-            msg += `📅 Data Emissão: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'})}\n`;
-            msg += `----------------------------------------\n`;
-            msg += `🛵 *Total de Corridas Realizadas:* ${entregues72h.length} entregas\n`;
-            msg += `💵 *Soma das Taxas de Entrega:* R$ ${totalTaxas.toFixed(2).replace('.', ',')}\n`;
-            msg += `💼 *Diárias Acumuladas (3 Dias):* R$ ${totalDiarias.toFixed(2).replace('.', ',')}\n`;
-            msg += `----------------------------------------\n`;
-            msg += `💰 *VALOR TOTAL DO REPASSE A PAGAR:*\n`;
-            msg += `👉 *R$ ${totalGeral.toFixed(2).replace('.', ',')}*\n`;
-            msg += `----------------------------------------\n`;
+            let msg = `*📊 MARMITA CERTA - EXTRATO DE REPASSE (CICLO DE 72 HORAS)*
+`;
+            msg += `📅 Período: Últimas 72 Horas (3 Dias)
+`;
+            msg += `📅 Data Emissão: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'})}
+`;
+            msg += `----------------------------------------
+`;
+            msg += `🛵 *Total de Corridas Realizadas:* ${entregues72h.length} entregas
+`;
+            msg += `💵 *Soma das Taxas de Entrega:* R$ ${totalTaxas.toFixed(2).replace('.', ',')}
+`;
+            msg += `💼 *Diárias Acumuladas (3 Dias):* R$ ${totalDiarias.toFixed(2).replace('.', ',')}
+`;
+            msg += `----------------------------------------
+`;
+            msg += `💰 *VALOR TOTAL DO REPASSE A PAGAR:*
+`;
+            msg += `👉 *R$ ${totalGeral.toFixed(2).replace('.', ',')}*
+`;
+            msg += `----------------------------------------
+`;
             msg += `_Comprovante gerado automaticamente pela plataforma Marmita Certa._`;
 
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
