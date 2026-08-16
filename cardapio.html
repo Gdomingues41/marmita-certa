@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marmita Caseira • Cardápio Online & Pedido Fácil</title>
+    <title>Marmita Caseira • Cardápio do Dia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,8 +12,8 @@
                     colors: {
                         brandOrange: '#F36A21',
                         brandOrangeDark: '#D85612',
-                        brandCharcoal: '#1E1E24',
-                        brandCream: '#FFF8F0',
+                        brandCharcoal: '#18181B',
+                        brandCardBg: '#242428',
                         brandGreen: '#16A34A'
                     }
                 }
@@ -23,162 +23,187 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-        .dish-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .dish-card { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
         .dish-card:active { transform: scale(0.98); }
-        .dish-card.selected { border-color: #F36A21; background-color: #FFF8F0; box-shadow: 0 10px 25px -5px rgba(243, 106, 33, 0.25); }
+        .dish-card.selected { border-color: #F36A21; background-color: #2F2A26; box-shadow: 0 10px 25px -5px rgba(243, 106, 33, 0.3); }
         .size-btn.selected { background-color: #F36A21; color: white; border-color: #F36A21; }
+        .zoom-badge { backdrop-blur: 4px; }
     </style>
 </head>
-<body class="bg-gray-100 text-brandCharcoal min-h-screen pb-32">
+<body class="bg-[#121215] text-gray-100 min-h-screen pb-32">
 
-    <!-- Top Banner com Imagem & Chamada de Apetite -->
-    <header class="relative bg-brandCharcoal text-white overflow-hidden shadow-lg">
-        <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80');"></div>
+    <!-- Top Banner -->
+    <header class="relative bg-brandCharcoal text-white overflow-hidden shadow-2xl border-b border-gray-800">
+        <div class="absolute inset-0 opacity-25 bg-cover bg-center" style="background-image: url('marmita_bife.png');"></div>
         <div class="relative max-w-lg mx-auto px-5 pt-8 pb-7 text-center">
-            <span class="inline-flex items-center gap-1.5 bg-brandOrange text-white text-[11px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md mb-3">
-                <i class="fa-solid fa-fire text-amber-300"></i> Almoço Caseiro Feito na Hora
+            <span class="inline-flex items-center gap-1.5 bg-brandOrange text-white text-[11px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md mb-2.5">
+                <i class="fa-solid fa-fire text-amber-300"></i> Comida Caseira Feita na Hora
             </span>
-            <h1 class="text-2xl sm:text-3xl font-black leading-tight drop-shadow-md">
-                Marmitas do <span class="text-brandOrange">Dia</span>
+            <h1 class="text-2xl sm:text-3xl font-black leading-tight">
+                Cardápio de <span class="text-brandOrange">Hoje</span>
             </h1>
-            <p class="text-xs text-gray-200 mt-1.5 font-medium max-w-xs mx-auto">
-                Monte sua marmita em segundos e envie o pedido pronto direto no nosso WhatsApp!
+            <p class="text-xs text-gray-300 mt-1.5 font-medium max-w-xs mx-auto">
+                Arroz soltinho, feijão temperado, fritas crocantes e carnes suculentas!
             </p>
-            <div class="mt-3 flex items-center justify-center gap-3 text-[11px] font-bold text-gray-300">
+            <div class="mt-3 flex items-center justify-center gap-3 text-[11px] font-bold text-gray-400">
                 <span><i class="fa-solid fa-motorcycle text-brandOrange"></i> Entrega Rápida</span>
                 <span>•</span>
-                <span><i class="fa-solid fa-shield-halved text-emerald-400"></i> Pagamento na Entrega</span>
+                <span><i class="fa-solid fa-credit-card text-emerald-400"></i> Pix / Cartão / Dinheiro</span>
             </div>
         </div>
     </header>
 
-    <main class="max-w-lg mx-auto px-4 mt-5 space-y-6">
+    <main class="max-w-lg mx-auto px-4 mt-5 space-y-5">
 
         <!-- ETAPA 1: ESCOLHA O TAMANHO -->
-        <section class="bg-white p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3">
-            <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-                <h2 class="text-sm font-black uppercase text-brandCharcoal flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-xl bg-orange-100 text-brandOrange flex items-center justify-center text-xs font-black">1</span>
+        <section class="bg-brandCardBg p-5 rounded-3xl border border-gray-800 shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-700/60 pb-2">
+                <h2 class="text-xs font-black uppercase tracking-wider text-gray-200 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-xl bg-brandOrange/20 text-brandOrange flex items-center justify-center text-xs font-black">1</span>
                     Escolha o Tamanho
                 </h2>
-                <span class="text-[10px] text-gray-400 font-bold">Obrigatório</span>
+                <span class="text-[10px] text-gray-400 font-bold">Passo Obrigatório</span>
             </div>
 
             <div class="grid grid-cols-3 gap-2.5">
-                <button type="button" onclick="selecionarTamanho('P', 15.00)" id="btn-size-P" class="size-btn p-3 rounded-2xl border-2 border-gray-200 text-center transition flex flex-col items-center justify-center">
-                    <span class="text-[11px] font-black uppercase tracking-wide text-gray-500">Marmita P</span>
-                    <strong class="text-lg font-black text-brandCharcoal mt-0.5">R$ 15</strong>
+                <button type="button" onclick="selecionarTamanho('P', 15.00)" id="btn-size-P" class="size-btn p-3 rounded-2xl border-2 border-gray-700 text-center transition flex flex-col items-center justify-center bg-gray-800/50">
+                    <span class="text-[10px] font-black uppercase tracking-wide text-gray-400">Marmita P</span>
+                    <strong class="text-lg font-black text-white mt-0.5">R$ 15</strong>
                     <span class="text-[9px] text-gray-400 font-bold mt-0.5">Individual</span>
                 </button>
 
-                <button type="button" onclick="selecionarTamanho('M', 20.00)" id="btn-size-M" class="size-btn selected p-3 rounded-2xl border-2 border-brandOrange bg-brandOrange text-white text-center transition flex flex-col items-center justify-center relative shadow-sm">
+                <button type="button" onclick="selecionarTamanho('M', 20.00)" id="btn-size-M" class="size-btn selected p-3 rounded-2xl border-2 border-brandOrange bg-brandOrange text-white text-center transition flex flex-col items-center justify-center relative shadow-md">
                     <span class="absolute -top-2.5 bg-amber-400 text-brandCharcoal text-[8px] font-black px-2 py-0.5 rounded-full uppercase shadow-xs">Top 🔥</span>
-                    <span class="text-[11px] font-black uppercase tracking-wide">Marmita M</span>
+                    <span class="text-[10px] font-black uppercase tracking-wide">Marmita M</span>
                     <strong class="text-lg font-black mt-0.5">R$ 20</strong>
                     <span class="text-[9px] opacity-90 font-bold mt-0.5">Mais Pedida</span>
                 </button>
 
-                <button type="button" onclick="selecionarTamanho('G', 30.00)" id="btn-size-G" class="size-btn p-3 rounded-2xl border-2 border-gray-200 text-center transition flex flex-col items-center justify-center">
-                    <span class="text-[11px] font-black uppercase tracking-wide text-gray-500">Marmita G</span>
-                    <strong class="text-lg font-black text-brandCharcoal mt-0.5">R$ 30</strong>
+                <button type="button" onclick="selecionarTamanho('G', 30.00)" id="btn-size-G" class="size-btn p-3 rounded-2xl border-2 border-gray-700 text-center transition flex flex-col items-center justify-center bg-gray-800/50">
+                    <span class="text-[10px] font-black uppercase tracking-wide text-gray-400">Marmita G</span>
+                    <strong class="text-lg font-black text-white mt-0.5">R$ 30</strong>
                     <span class="text-[9px] text-gray-400 font-bold mt-0.5">Caprichada</span>
                 </button>
             </div>
         </section>
 
-        <!-- ETAPA 2: ESCOLHA SUA MISTURA -->
-        <section class="bg-white p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3">
-            <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-                <h2 class="text-sm font-black uppercase text-brandCharcoal flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-xl bg-orange-100 text-brandOrange flex items-center justify-center text-xs font-black">2</span>
-                    Escolha sua Mistura
-                </h2>
-                <span class="text-[10px] text-brandOrange font-black uppercase">Selecione 1</span>
+        <!-- ETAPA 2: ESCOLHA SUA MISTURA COM FOTOS REAIS & LIGHTBOX -->
+        <section class="bg-brandCardBg p-5 rounded-3xl border border-gray-800 shadow-lg space-y-3">
+            <div class="flex items-center justify-between border-b border-gray-700/60 pb-2">
+                <div>
+                    <h2 class="text-xs font-black uppercase tracking-wider text-gray-200 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-xl bg-brandOrange/20 text-brandOrange flex items-center justify-center text-xs font-black">2</span>
+                        Escolha sua Mistura
+                    </h2>
+                </div>
+                <span class="text-[10px] text-amber-400 font-bold">🔍 Toque na foto para ampliar</span>
             </div>
 
             <div class="space-y-3" id="lista-misturas">
+                
                 <!-- Bife Acebolado -->
-                <div onclick="selecionarMistura('Bife Acebolado Suculento', this)" class="dish-card selected border-2 border-brandOrange rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer bg-orange-50/50">
-                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=240&q=80" alt="Bife Acebolado" class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0">
+                <div onclick="selecionarMistura('Bife Acebolado Suculento', this)" class="dish-card selected border-2 border-brandOrange rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer bg-[#2F2A26]">
+                    <div class="relative w-20 h-20 flex-shrink-0">
+                        <img src="marmita_bife.png" alt="Bife Acebolado" onclick="abrirLightbox(this.src, 'Bife Acebolado Suculento'); event.stopPropagation();" class="w-20 h-20 rounded-xl object-cover shadow-md border border-gray-700">
+                        <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] px-1 py-0.5 rounded-md font-bold zoom-badge">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </span>
+                    </div>
                     <div class="flex-grow">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-extrabold text-sm text-brandCharcoal">Bife Acebolado Suculento</h3>
+                            <h3 class="font-black text-sm text-white">Bife Acebolado Suculento</h3>
                             <span class="radio-check text-brandOrange text-base"><i class="fa-solid fa-circle-check"></i></span>
                         </div>
-                        <p class="text-[11px] text-gray-500 font-medium mt-0.5 leading-snug">
-                            Bife bovino macio grelhado na chapa, coberto com cebolas caramelizadas e cheiro-verde.
+                        <p class="text-[11px] text-gray-400 font-medium mt-0.5 leading-snug">
+                            Bife bovino grelhado na chapa coberto com cebolas caramelizadas e cheiro-verde.
                         </p>
                     </div>
                 </div>
 
                 <!-- Filé de Frango -->
-                <div onclick="selecionarMistura('Filé de Frango Grelhado', this)" class="dish-card border-2 border-gray-200 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-300">
-                    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=240&q=80" alt="Frango Grelhado" class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0">
+                <div onclick="selecionarMistura('Filé de Frango Grelhado', this)" class="dish-card border-2 border-gray-700/80 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-500/50 bg-gray-800/40">
+                    <div class="relative w-20 h-20 flex-shrink-0">
+                        <img src="marmita_frango.png" alt="Filé de Frango" onclick="abrirLightbox(this.src, 'Filé de Frango Douradinho'); event.stopPropagation();" class="w-20 h-20 rounded-xl object-cover shadow-md border border-gray-700">
+                        <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] px-1 py-0.5 rounded-md font-bold zoom-badge">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </span>
+                    </div>
                     <div class="flex-grow">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-extrabold text-sm text-brandCharcoal">Filé de Frango Douradinho</h3>
-                            <span class="radio-check text-gray-300 text-base"><i class="fa-regular fa-circle"></i></span>
+                            <h3 class="font-black text-sm text-white">Filé de Frango Douradinho</h3>
+                            <span class="radio-check text-gray-500 text-base"><i class="fa-regular fa-circle"></i></span>
                         </div>
-                        <p class="text-[11px] text-gray-500 font-medium mt-0.5 leading-snug">
-                            Filé de peito de frango marinado em ervas naturais e dourado na chapa com perfeição.
+                        <p class="text-[11px] text-gray-400 font-medium mt-0.5 leading-snug">
+                            Peito de frango selecionado, suculento por dentro e grelhado com tempero caseiro.
                         </p>
                     </div>
                 </div>
 
                 <!-- Calabresa Acebolada -->
-                <div onclick="selecionarMistura('Calabresa Acebolada', this)" class="dish-card border-2 border-gray-200 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-300">
-                    <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=240&q=80" alt="Calabresa" class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0">
+                <div onclick="selecionarMistura('Calabresa Acebolada', this)" class="dish-card border-2 border-gray-700/80 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-500/50 bg-gray-800/40">
+                    <div class="relative w-20 h-20 flex-shrink-0">
+                        <img src="marmita_calabresa.png" alt="Calabresa" onclick="abrirLightbox(this.src, 'Calabresa Acebolada'); event.stopPropagation();" class="w-20 h-20 rounded-xl object-cover shadow-md border border-gray-700">
+                        <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] px-1 py-0.5 rounded-md font-bold zoom-badge">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </span>
+                    </div>
                     <div class="flex-grow">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-extrabold text-sm text-brandCharcoal">Calabresa Acebolada</h3>
-                            <span class="radio-check text-gray-300 text-base"><i class="fa-regular fa-circle"></i></span>
+                            <h3 class="font-black text-sm text-white">Calabresa Acebolada</h3>
+                            <span class="radio-check text-gray-500 text-base"><i class="fa-regular fa-circle"></i></span>
                         </div>
-                        <p class="text-[11px] text-gray-500 font-medium mt-0.5 leading-snug">
-                            Fatias de linguiça calabresa defumada frita com bastante cebola dourada e tempero da casa.
+                        <p class="text-[11px] text-gray-400 font-medium mt-0.5 leading-snug">
+                            Calabresa defumada fatiada em tiras generosas com cebolas douradas.
                         </p>
                     </div>
                 </div>
 
-                <!-- Misto Bife + Calabresa -->
-                <div onclick="selecionarMistura('Misto Especial (Bife + Calabresa)', this)" class="dish-card border-2 border-gray-200 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-300">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=240&q=80" alt="Misto Bife e Calabresa" class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0">
+                <!-- Misto Especial -->
+                <div onclick="selecionarMistura('Misto Especial (Bife + Calabresa)', this)" class="dish-card border-2 border-gray-700/80 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-500/50 bg-gray-800/40">
+                    <div class="relative w-20 h-20 flex-shrink-0">
+                        <img src="marmita_bife.png" alt="Misto" onclick="abrirLightbox(this.src, 'Misto Especial (Bife + Calabresa)'); event.stopPropagation();" class="w-20 h-20 rounded-xl object-cover shadow-md border border-gray-700">
+                        <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] px-1 py-0.5 rounded-md font-bold zoom-badge">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </span>
+                    </div>
                     <div class="flex-grow">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-extrabold text-sm text-brandCharcoal">Misto Especial (Bife + Calabresa)</h3>
-                            <span class="radio-check text-gray-300 text-base"><i class="fa-regular fa-circle"></i></span>
+                            <h3 class="font-black text-sm text-white">Misto Especial (Bife + Calabresa)</h3>
+                            <span class="radio-check text-gray-500 text-base"><i class="fa-regular fa-circle"></i></span>
                         </div>
-                        <p class="text-[11px] text-gray-500 font-medium mt-0.5 leading-snug">
-                            A combinação perfeita: meia porção de bife suculento + meia porção de calabresa acebolada.
+                        <p class="text-[11px] text-gray-400 font-medium mt-0.5 leading-snug">
+                            O melhor dos dois mundos: meia porção de bife acebolado + meia porção de calabresa.
                         </p>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- ETAPA 3: ACOMPANHAMENTOS INCLUSOS -->
-        <section class="bg-white p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3">
-            <div class="border-b border-gray-100 pb-2">
-                <h2 class="text-sm font-black uppercase text-brandCharcoal flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-xl bg-orange-100 text-brandOrange flex items-center justify-center text-xs font-black">3</span>
-                    Acompanhamentos do Prato
+        <section class="bg-brandCardBg p-5 rounded-3xl border border-gray-800 shadow-lg space-y-3">
+            <div class="border-b border-gray-700/60 pb-2">
+                <h2 class="text-xs font-black uppercase tracking-wider text-gray-200 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-xl bg-brandOrange/20 text-brandOrange flex items-center justify-center text-xs font-black">3</span>
+                    Acompanhamentos Inclusos
                 </h2>
-                <p class="text-[11px] text-gray-500 mt-0.5 font-medium">Todos já vêm inclusos na sua marmita! Desmarque se não desejar algum item:</p>
+                <p class="text-[11px] text-gray-400 mt-0.5 font-medium">Todos já inclusos! Desmarque se não desejar algum:</p>
             </div>
 
             <div class="grid grid-cols-2 gap-2 text-xs font-bold">
-                <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-orange-50 transition border border-gray-200">
+                <label class="flex items-center gap-2 p-2.5 bg-gray-800/60 rounded-xl cursor-pointer hover:bg-gray-800 transition border border-gray-700">
                     <input type="checkbox" id="chk-arroz" checked class="w-4 h-4 text-brandOrange rounded focus:ring-brandOrange accent-brandOrange">
                     <span>🍚 Arroz Branco</span>
                 </label>
-                <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-orange-50 transition border border-gray-200">
+                <label class="flex items-center gap-2 p-2.5 bg-gray-800/60 rounded-xl cursor-pointer hover:bg-gray-800 transition border border-gray-700">
                     <input type="checkbox" id="chk-feijao" checked class="w-4 h-4 text-brandOrange rounded focus:ring-brandOrange accent-brandOrange">
                     <span>🫘 Feijão Caseiro</span>
                 </label>
-                <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-orange-50 transition border border-gray-200">
+                <label class="flex items-center gap-2 p-2.5 bg-gray-800/60 rounded-xl cursor-pointer hover:bg-gray-800 transition border border-gray-700">
                     <input type="checkbox" id="chk-fritas" checked class="w-4 h-4 text-brandOrange rounded focus:ring-brandOrange accent-brandOrange">
                     <span>🍟 Batata Frita</span>
                 </label>
-                <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-orange-50 transition border border-gray-200">
+                <label class="flex items-center gap-2 p-2.5 bg-gray-800/60 rounded-xl cursor-pointer hover:bg-gray-800 transition border border-gray-700">
                     <input type="checkbox" id="chk-salada" checked class="w-4 h-4 text-brandOrange rounded focus:ring-brandOrange accent-brandOrange">
                     <span>🥗 Salada Alface/Tomate</span>
                 </label>
@@ -186,29 +211,28 @@
         </section>
 
         <!-- ETAPA 4: ADICIONAIS EXTRAS -->
-        <section class="bg-white p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3">
-            <div class="border-b border-gray-100 pb-2">
-                <h2 class="text-sm font-black uppercase text-brandCharcoal flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-xl bg-orange-100 text-brandOrange flex items-center justify-center text-xs font-black">4</span>
-                    Quer turbinar sua Marmita?
+        <section class="bg-brandCardBg p-5 rounded-3xl border border-gray-800 shadow-lg space-y-3">
+            <div class="border-b border-gray-700/60 pb-2">
+                <h2 class="text-xs font-black uppercase tracking-wider text-gray-200 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-xl bg-brandOrange/20 text-brandOrange flex items-center justify-center text-xs font-black">4</span>
+                    Adicionais Opcionais
                 </h2>
-                <p class="text-[11px] text-gray-500 mt-0.5 font-medium">Adicione itens extras com 1 toque:</p>
             </div>
 
             <div class="space-y-2 text-xs font-bold">
-                <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-orange-50 transition border border-gray-200" onchange="atualizarTotal()">
+                <label class="flex items-center justify-between p-3 bg-gray-800/60 rounded-xl cursor-pointer hover:bg-gray-800 transition border border-gray-700" onchange="atualizarTotal()">
                     <div class="flex items-center gap-2.5">
                         <input type="checkbox" id="add-ovo" value="3.00" class="w-4 h-4 text-brandOrange rounded accent-brandOrange">
-                        <span>🍳 Ovo Frito com Gema Mole (+ R$ 3,00)</span>
+                        <span>🍳 Ovo Frito (+ R$ 3,00)</span>
                     </div>
                 </label>
-                <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-orange-50 transition border border-gray-200" onchange="atualizarTotal()">
+                <label class="flex items-center justify-between p-3 bg-gray-800/60 rounded-xl cursor-pointer hover:bg-gray-800 transition border border-gray-700" onchange="atualizarTotal()">
                     <div class="flex items-center gap-2.5">
                         <input type="checkbox" id="add-batata" value="5.00" class="w-4 h-4 text-brandOrange rounded accent-brandOrange">
                         <span>🍟 Porção Extra de Fritas (+ R$ 5,00)</span>
                     </div>
                 </label>
-                <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-orange-50 transition border border-gray-200" onchange="atualizarTotal()">
+                <label class="flex items-center justify-between p-3 bg-gray-800/60 rounded-xl cursor-pointer hover:bg-gray-800 transition border border-gray-700" onchange="atualizarTotal()">
                     <div class="flex items-center gap-2.5">
                         <input type="checkbox" id="add-refrigerante" value="6.00" class="w-4 h-4 text-brandOrange rounded accent-brandOrange">
                         <span>🥤 Coca-Cola Lata 350ml (+ R$ 6,00)</span>
@@ -217,32 +241,32 @@
             </div>
         </section>
 
-        <!-- ETAPA 5: SEUS DADOS PARA ENTREGA -->
-        <section class="bg-white p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3">
-            <div class="border-b border-gray-100 pb-2">
-                <h2 class="text-sm font-black uppercase text-brandCharcoal flex items-center gap-2">
-                    <span class="w-6 h-6 rounded-xl bg-orange-100 text-brandOrange flex items-center justify-center text-xs font-black">5</span>
+        <!-- ETAPA 5: ENDEREÇO & PAGAMENTO -->
+        <section class="bg-brandCardBg p-5 rounded-3xl border border-gray-800 shadow-lg space-y-3">
+            <div class="border-b border-gray-700/60 pb-2">
+                <h2 class="text-xs font-black uppercase tracking-wider text-gray-200 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-xl bg-brandOrange/20 text-brandOrange flex items-center justify-center text-xs font-black">5</span>
                     Endereço & Pagamento
                 </h2>
             </div>
 
             <div class="space-y-3 text-xs font-bold">
                 <div>
-                    <label class="block uppercase mb-1 text-gray-500">Seu Nome</label>
+                    <label class="block uppercase mb-1 text-gray-400">Seu Nome</label>
                     <input type="text" id="cli-nome" placeholder="Ex: Gabriel Domingues" 
-                        class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                        class="w-full px-3.5 py-2.5 bg-gray-900 border border-gray-700 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold text-white">
                 </div>
 
                 <div>
-                    <label class="block uppercase mb-1 text-gray-500">Endereço de Entrega (Rua, Número, Apto)</label>
+                    <label class="block uppercase mb-1 text-gray-400">Endereço de Entrega (Rua, Número, Apto)</label>
                     <input type="text" id="cli-endereco" placeholder="Ex: Rua das Flores, 120 - Apto 31" 
-                        class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold">
+                        class="w-full px-3.5 py-2.5 bg-gray-900 border border-gray-700 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-semibold text-white">
                 </div>
 
                 <div>
-                    <label class="block uppercase mb-1 text-gray-500">Forma de Pagamento</label>
-                    <select id="cli-pagamento" class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-bold">
-                        <option value="Pix (Chave no WhatsApp)">🟢 Pix (Vou pedir a chave no Zap)</option>
+                    <label class="block uppercase mb-1 text-gray-400">Forma de Pagamento</label>
+                    <select id="cli-pagamento" class="w-full px-3.5 py-2.5 bg-gray-900 border border-gray-700 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-bold text-white">
+                        <option value="Pix (Chave no WhatsApp)">🟢 Pix (Pedir chave no WhatsApp)</option>
                         <option value="Cartão de Débito (Levar maquininha)">💳 Cartão de Débito na Entrega</option>
                         <option value="Cartão de Crédito (Levar maquininha)">💳 Cartão de Crédito na Entrega</option>
                         <option value="Dinheiro">💵 Dinheiro em Espécie</option>
@@ -250,25 +274,39 @@
                 </div>
 
                 <div>
-                    <label class="block uppercase mb-1 text-gray-500">Observações (Opcional)</label>
+                    <label class="block uppercase mb-1 text-gray-400">Observações (Opcional)</label>
                     <input type="text" id="cli-obs" placeholder="Ex: Caprichar no feijão, sem cebola..." 
-                        class="w-full px-3.5 py-2 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-medium">
+                        class="w-full px-3.5 py-2 bg-gray-900 border border-gray-700 rounded-xl outline-none focus:ring-2 focus:ring-brandOrange font-medium text-white">
                 </div>
             </div>
         </section>
 
     </main>
 
+    <!-- MODAL LIGHTBOX (EXPANSÃO DE FOTO EM TELA CHEIA) -->
+    <div id="lightbox-modal" onclick="fecharLightbox()" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4 hidden cursor-pointer">
+        <div class="relative max-w-sm w-full space-y-2 text-center" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between text-white px-2">
+                <span id="lightbox-title" class="font-black text-sm text-brandOrange uppercase tracking-wide">Foto do Prato</span>
+                <button onclick="fecharLightbox()" class="w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 text-white flex items-center justify-center text-sm font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <img id="lightbox-img" src="" alt="Marmita Ampliada" class="w-full rounded-2xl shadow-2xl object-cover border-2 border-brandOrange max-h-[75vh]">
+            <p class="text-[11px] text-gray-400 font-semibold">Toque fora da foto para fechar</p>
+        </div>
+    </div>
+
     <!-- BARRA FIXA FLUTUANTE INFERIOR -->
-    <div class="fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-2xl z-40">
+    <div class="fixed bottom-0 left-0 right-0 p-3 bg-brandCharcoal/95 backdrop-blur-md border-t border-gray-800 shadow-2xl z-40">
         <div class="max-w-lg mx-auto flex items-center justify-between gap-3">
             <div>
-                <span class="text-[10px] font-black uppercase text-gray-400 block">Total do Pedido:</span>
+                <span class="text-[10px] font-black uppercase text-gray-400 block">Total:</span>
                 <strong id="bar-total" class="text-2xl font-black text-brandOrange leading-none">R$ 20,00</strong>
-                <span id="bar-resumo" class="text-[10px] text-gray-500 font-bold block mt-0.5 truncate max-w-[150px]">1x Marmita M</span>
+                <span id="bar-resumo" class="text-[10px] text-gray-400 font-bold block mt-0.5 truncate max-w-[140px]">1x Marmita M</span>
             </div>
 
-            <button onclick="finalizarPedidoWhatsApp()" class="flex-grow bg-brandGreen hover:bg-emerald-700 text-white font-black py-3.5 px-4 rounded-2xl shadow-lg shadow-emerald-500/30 transition flex items-center justify-center gap-2 text-xs uppercase tracking-wide">
+            <button onclick="finalizarPedidoWhatsApp()" class="flex-grow bg-brandGreen hover:bg-emerald-700 text-white font-black py-3.5 px-4 rounded-2xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2 text-xs uppercase tracking-wide">
                 <i class="fa-brands fa-whatsapp text-lg"></i>
                 <span>Pedir no WhatsApp</span>
             </button>
@@ -281,6 +319,16 @@
         let precoBase = 20.00;
         let misturaSelecionada = 'Bife Acebolado Suculento';
 
+        function abrirLightbox(src, titulo) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-title').innerText = titulo;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function fecharLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
         function selecionarTamanho(tam, preco) {
             tamanhoSelecionado = tam;
             precoBase = preco;
@@ -288,9 +336,9 @@
             ['P', 'M', 'G'].forEach(t => {
                 const btn = document.getElementById(`btn-size-${t}`);
                 if (t === tam) {
-                    btn.className = "size-btn selected p-3 rounded-2xl border-2 border-brandOrange bg-brandOrange text-white text-center transition flex flex-col items-center justify-center shadow-sm";
+                    btn.className = "size-btn selected p-3 rounded-2xl border-2 border-brandOrange bg-brandOrange text-white text-center transition flex flex-col items-center justify-center shadow-md";
                 } else {
-                    btn.className = "size-btn p-3 rounded-2xl border-2 border-gray-200 text-center transition flex flex-col items-center justify-center";
+                    btn.className = "size-btn p-3 rounded-2xl border-2 border-gray-700 text-center transition flex flex-col items-center justify-center bg-gray-800/50";
                 }
             });
 
@@ -301,12 +349,12 @@
             misturaSelecionada = nome;
             
             document.querySelectorAll('#lista-misturas .dish-card').forEach(card => {
-                card.className = "dish-card border-2 border-gray-200 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-300";
-                card.querySelector('.radio-check').className = "radio-check text-gray-300 text-base";
+                card.className = "dish-card border-2 border-gray-700/80 rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer hover:border-orange-500/50 bg-gray-800/40";
+                card.querySelector('.radio-check').className = "radio-check text-gray-500 text-base";
                 card.querySelector('.radio-check').innerHTML = '<i class="fa-regular fa-circle"></i>';
             });
 
-            el.className = "dish-card selected border-2 border-brandOrange rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer bg-orange-50/50 shadow-xs";
+            el.className = "dish-card selected border-2 border-brandOrange rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer bg-[#2F2A26] shadow-md";
             el.querySelector('.radio-check').className = "radio-check text-brandOrange text-base";
             el.querySelector('.radio-check').innerHTML = '<i class="fa-solid fa-circle-check"></i>';
 
