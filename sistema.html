@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marmita Certa - KDS, Pagamentos & Rota WhatsApp</title>
+    <title>Marmita Certa - KDS, Pagamentos, Motoboy & Repasse 72h</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -54,7 +54,7 @@
                     <h1 class="text-lg md:text-xl font-black text-brandCharcoal dark:text-white leading-tight">
                         Marmita <span class="text-brandOrange">Certa</span>
                     </h1>
-                    <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold hidden sm:block">KDS • Despacho WhatsApp • Instruções de Pagamento • Caixa</p>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold hidden sm:block">KDS • Despacho WhatsApp • Contato Direto • Repasse 72h</p>
                 </div>
             </div>
 
@@ -174,21 +174,54 @@
             </div>
         </section>
 
-        <!-- 2. VISÃO DO MOTOBOY -->
+        <!-- 2. VISÃO DO MOTOBOY COM CONTROLE DE REPASSE EM 72 HORAS -->
         <section id="view-motoboy" class="view-panel hidden space-y-5">
-            <div class="bg-gradient-to-r from-orange-500 to-amber-600 text-white p-5 rounded-2xl shadow-md flex items-center justify-between">
+            <div class="bg-gradient-to-r from-orange-500 to-amber-600 text-white p-5 rounded-2xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <span class="text-[11px] font-black uppercase tracking-wider opacity-90">Painel do Entregador</span>
                     <h2 class="text-2xl font-black flex items-center gap-2 mt-0.5">
-                        <i class="fa-solid fa-motorcycle"></i> Rotas de Entrega
+                        <i class="fa-solid fa-motorcycle"></i> Rotas de Entrega & Repasse
                     </h2>
-                    <p class="text-xs opacity-90 mt-1">Confira a instrução de cobrança, navegue pelo mapa e confirme com 1 toque.</p>
+                    <p class="text-xs opacity-90 mt-1">Navegação por GPS, cobrança transparente e controle de repasse em 72h.</p>
                 </div>
-                <div class="bg-white/20 backdrop-blur-md px-4 py-2 rounded-xl text-center border border-white/20">
-                    <p class="text-[10px] uppercase font-bold">Na sua Rota</p>
-                    <p id="motoboy-contador-pendentes" class="text-2xl font-black">0</p>
+                
+                <div class="flex items-center gap-2">
+                    <div class="bg-white/20 backdrop-blur-md px-3.5 py-2 rounded-xl text-center border border-white/20">
+                        <p class="text-[9px] uppercase font-bold">Na sua Rota</p>
+                        <p id="motoboy-contador-pendentes" class="text-xl font-black">0</p>
+                    </div>
+                    <div class="bg-emerald-950/40 backdrop-blur-md px-3.5 py-2 rounded-xl text-center border border-emerald-400/30">
+                        <p class="text-[9px] uppercase font-bold text-emerald-200">Ganhos (72h)</p>
+                        <p id="motoboy-ganho-72h" class="text-xl font-black text-emerald-300">R$ 0,00</p>
+                    </div>
+                    <button onclick="gerarExtratoRepasse72hZap()" class="bg-white text-brandOrange hover:bg-orange-50 font-black text-xs px-3.5 py-2.5 rounded-xl shadow-md transition btn-press flex items-center gap-1.5 self-stretch md:self-auto">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Extrato 72h
+                    </button>
                 </div>
             </div>
+
+            <!-- Card Resumo do Ciclo de 72 Horas para o Motoboy -->
+            <div class="bg-white dark:bg-brandDarkCard p-4 rounded-2xl border border-gray-200 dark:border-brandDarkBorder shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div class="p-2.5 bg-orange-50/60 dark:bg-brandCharcoal rounded-xl border border-orange-100 dark:border-brandDarkBorder">
+                    <span class="text-[10px] text-gray-500 dark:text-gray-400 font-bold block uppercase">Período de Apuração</span>
+                    <strong class="text-brandOrange font-black text-xs">Últimas 72 Horas</strong>
+                </div>
+                <div class="p-2.5 bg-gray-50 dark:bg-brandCharcoal rounded-xl">
+                    <span class="text-[10px] text-gray-500 dark:text-gray-400 font-bold block uppercase">Corridas Feitas (72h)</span>
+                    <strong id="motoboy-qtd-72h" class="text-brandCharcoal dark:text-white font-black text-xs">0 entregas</strong>
+                </div>
+                <div class="p-2.5 bg-gray-50 dark:bg-brandCharcoal rounded-xl">
+                    <span class="text-[10px] text-gray-500 dark:text-gray-400 font-bold block uppercase">Taxas Acumuladas</span>
+                    <strong id="motoboy-taxas-72h" class="text-brandOrange font-black text-xs">R$ 0,00</strong>
+                </div>
+                <div class="p-2.5 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800">
+                    <span class="text-[10px] text-emerald-800 dark:text-emerald-300 font-bold block uppercase">Status do Repasse</span>
+                    <strong class="text-emerald-600 dark:text-emerald-400 font-black text-xs flex items-center gap-1">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Ciclo 72h Ativo
+                    </strong>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="motoboy-lista-pedidos"></div>
         </section>
 
@@ -431,16 +464,16 @@
             </div>
         </section>
 
-        <!-- 6. FECHAMENTO & CAIXA -->
+        <!-- 6. FECHAMENTO, CAIXA & REPASSE DE 72 HORAS -->
         <section id="view-fechamento" class="view-panel hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white dark:bg-brandDarkCard p-5 rounded-2xl border border-gray-200 dark:border-brandDarkBorder shadow-sm">
-                    <p class="text-xs font-bold text-gray-400 uppercase">Faturamento Bruto</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase">Faturamento Bruto (Hoje)</p>
                     <h3 id="fechamento-faturamento" class="text-2xl font-black text-brandCharcoal dark:text-white mt-1">R$ 0,00</h3>
                     <p id="fechamento-total-marmitas" class="text-[11px] text-gray-500 mt-1">0 marmitas entregues hoje</p>
                 </div>
                 <div class="bg-white dark:bg-brandDarkCard p-5 rounded-2xl border border-gray-200 dark:border-brandDarkBorder shadow-sm">
-                    <p class="text-xs font-bold text-gray-400 uppercase">Custo de Produção</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase">Custo de Produção (Hoje)</p>
                     <h3 id="fechamento-custo-producao" class="text-2xl font-black text-red-500 mt-1">R$ 0,00</h3>
                     <p class="text-[11px] text-gray-500 mt-1">Comida + Embalagem + Gás</p>
                 </div>
@@ -451,25 +484,66 @@
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-brandDarkCard p-6 rounded-2xl border border-gray-200 dark:border-brandDarkBorder shadow-sm space-y-4">
-                <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-brandDarkBorder">
+            <!-- ACERTO DO ENTREGADOR: ABA DIÁRIA E ABA CICLO 72 HORAS -->
+            <div class="bg-white dark:bg-brandDarkCard p-6 rounded-2xl border border-gray-200 dark:border-brandDarkBorder shadow-sm space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gray-100 dark:border-brandDarkBorder">
                     <div>
                         <h3 class="text-lg font-black text-brandCharcoal dark:text-white flex items-center gap-2">
-                            <i class="fa-solid fa-hand-holding-dollar text-emerald-500"></i> Acerto Transparente do Entregador
+                            <i class="fa-solid fa-hand-holding-dollar text-emerald-500"></i> Acerto & Repasse do Entregador
                         </h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Diária, taxas acumuladas por corrida e dinheiro recebido em mãos.</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Controle do fechamento diário e do repasse acumulado a cada 72 horas (3 dias).</p>
                     </div>
-                    <button onclick="gerarRelatorioFechamentoZap()" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-3.5 py-2 rounded-xl transition btn-press flex items-center gap-1.5">
-                        <i class="fa-brands fa-whatsapp"></i> Extrato no Zap
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <button onclick="gerarRelatorioFechamentoZap()" class="bg-gray-800 hover:bg-black text-white text-xs font-bold px-3 py-2 rounded-xl transition btn-press flex items-center gap-1">
+                            <i class="fa-brands fa-whatsapp"></i> Fechamento Hoje
+                        </button>
+                        <button onclick="gerarExtratoRepasse72hZap()" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-3.5 py-2 rounded-xl transition btn-press flex items-center gap-1.5 shadow-xs">
+                            <i class="fa-solid fa-clock-rotate-left"></i> Extrato Repasse 72h
+                        </button>
+                    </div>
                 </div>
+
+                <!-- BLOCO DESTACADO: REPASSE ACUMULADO EM 72 HORAS -->
+                <div class="p-5 rounded-2xl bg-gradient-to-r from-orange-50 to-amber-50 dark:from-brandCharcoal dark:to-orange-950/30 border-2 border-brandOrange/40 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-brandOrange animate-ping"></span>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-brandOrange">Ciclo de Repasse • Últimas 72 Horas (3 Dias)</h4>
+                        </div>
+                        <span class="text-[10px] bg-orange-100 dark:bg-orange-950 text-brandOrange font-extrabold px-2.5 py-0.5 rounded-full">Repasse Programado</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <div class="p-3 bg-white dark:bg-brandDarkCard rounded-xl border border-orange-100 dark:border-brandDarkBorder shadow-xs">
+                            <span class="text-[10px] text-gray-400 font-bold block uppercase">Corridas (72h)</span>
+                            <span id="repasse-72h-qtd-corridas" class="text-lg font-black text-brandCharcoal dark:text-white block mt-0.5">0 entregas</span>
+                        </div>
+                        <div class="p-3 bg-white dark:bg-brandDarkCard rounded-xl border border-orange-100 dark:border-brandDarkBorder shadow-xs">
+                            <span class="text-[10px] text-gray-400 font-bold block uppercase">Taxas Corridas (72h)</span>
+                            <span id="repasse-72h-taxas" class="text-lg font-black text-brandOrange block mt-0.5">R$ 0,00</span>
+                        </div>
+                        <div class="p-3 bg-white dark:bg-brandDarkCard rounded-xl border border-orange-100 dark:border-brandDarkBorder shadow-xs">
+                            <span class="text-[10px] text-gray-400 font-bold block uppercase">Diárias Estimadas</span>
+                            <span id="repasse-72h-diarias" class="text-lg font-black text-blue-600 dark:text-blue-400 block mt-0.5">R$ 120,00</span>
+                            <span class="text-[9px] text-gray-400 font-medium">3 dias x R$ 40</span>
+                        </div>
+                        <div class="p-3 bg-emerald-500 text-white rounded-xl shadow-md">
+                            <span class="text-[10px] text-emerald-100 font-bold block uppercase">Total a Repassar (72h)</span>
+                            <span id="repasse-72h-total-geral" class="text-lg font-black block mt-0.5">R$ 120,00</span>
+                            <span class="text-[9px] text-emerald-100 font-medium">Serviço Completo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalhes do Fechamento do Dia -->
+                <h4 class="text-xs font-black uppercase tracking-wider text-gray-400 pt-2">Detalhamento do Dia de Hoje</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                     <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-xl">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold block">Diária Fixa:</span>
+                        <span class="text-gray-500 dark:text-gray-400 font-bold block">Diária Fixa do Dia:</span>
                         <input type="number" id="motoboy-diaria-input" value="40" oninput="calcularFechamento()" class="mt-1 font-black text-sm bg-transparent border-b border-gray-300 dark:border-brandDarkBorder w-20 outline-none">
                     </div>
                     <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-xl">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold block">Taxas de Corridas:</span>
+                        <span class="text-gray-500 dark:text-gray-400 font-bold block">Taxas Corridas (Hoje):</span>
                         <span id="motoboy-taxas-acumuladas" class="font-black text-sm text-brandOrange block mt-1">R$ 0,00</span>
                     </div>
                     <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-xl">
@@ -477,13 +551,14 @@
                         <span id="motoboy-qtd-corridas" class="font-black text-sm text-brandCharcoal dark:text-white block mt-1">0</span>
                     </div>
                     <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800">
-                        <span class="text-emerald-800 dark:text-emerald-300 font-black block">Total Serviço Entregador:</span>
+                        <span class="text-emerald-800 dark:text-emerald-300 font-black block">Total Serviço (Hoje):</span>
                         <span id="motoboy-valor-servico" class="font-black text-sm text-emerald-600 block mt-1">R$ 40,00</span>
                     </div>
                 </div>
+
                 <div class="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                     <div>
-                        <strong class="text-amber-900 dark:text-amber-200 font-black">Dinheiro Recebido em Espécie na Rua:</strong>
+                        <strong class="text-amber-900 dark:text-amber-200 font-black">Dinheiro Recebido em Espécie na Rua (Hoje):</strong>
                         <p class="text-amber-700 dark:text-amber-400 text-[11px]">Soma apenas marmitas marcadas como pagamento em Dinheiro.</p>
                     </div>
                     <div class="text-right">
@@ -622,19 +697,18 @@
         </button>
     </nav>
 
-    <!-- ================================================================================= -->
-    <!-- LOGICA JAVASCRIPT                                                                 -->
-    <!-- ================================================================================= -->
+    <!-- LOGICA JAVASCRIPT -->
     <script>
-// =================================================================================
-        // ÁUDIOS REAIS CARREGADOS DIRETO DO REPOSITÓRIO (MP3)
-        // =================================================================================
         const audioPedido = new Audio('alerta_pedido.mp3');
         const audioMotoboy = new Audio('notificacao_entrega.mp3');
 
-        // Pré-carregamento dos arquivos de áudio
         audioPedido.load();
         audioMotoboy.load();
+
+        let intervalAudioMotoboy = null;
+        let timerOfertaInterval = null;
+        let segundosRestantesOferta = 45;
+        let corridaOfertadaAtual = null;
 
         function tocarAlertaSonoro(tipo = 'pedido') {
             try {
@@ -642,25 +716,88 @@
                     audioPedido.currentTime = 0;
                     const playPromise = audioPedido.play();
                     if (playPromise !== undefined) {
-                        playPromise.catch(err => {
-                            console.warn("Autoplay bloqueado aguardando interação do usuário:", err);
-                        });
+                        playPromise.catch(err => console.warn("Autoplay bloqueado:", err));
                     }
                 } else if (tipo === 'motoboy') {
                     audioMotoboy.currentTime = 0;
-                    const playPromise = audioMotoboy.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(err => {
-                            console.warn("Autoplay bloqueado aguardando interação do usuário:", err);
-                        });
+                    audioMotoboy.play().catch(e => console.warn(e));
+                    if (!intervalAudioMotoboy) {
+                        intervalAudioMotoboy = setInterval(() => {
+                            audioMotoboy.currentTime = 0;
+                            audioMotoboy.play().catch(e => console.warn(e));
+                        }, 2500);
                     }
                 }
             } catch (err) {
-                console.error("Erro ao tocar arquivo de áudio:", err);
+                console.error("Erro áudio:", err);
             }
         }
 
-        // ESTADO GLOBAL
+        function pararAlarmeMotoboy() {
+            if (intervalAudioMotoboy) {
+                clearInterval(intervalAudioMotoboy);
+                intervalAudioMotoboy = null;
+            }
+            audioMotoboy.pause();
+            audioMotoboy.currentTime = 0;
+        }
+
+        function dispararOfertaMotoboy(pedido) {
+            corridaOfertadaAtual = pedido;
+            segundosRestantesOferta = 45;
+            
+            document.getElementById('oferta-taxa-valor').innerText = `R$ ${pedido.taxaMotoboy.toFixed(2).replace('.', ',')}`;
+            document.getElementById('oferta-endereco').innerText = pedido.endereco;
+            document.getElementById('oferta-itens').innerText = pedido.itens;
+            document.getElementById('oferta-pagamento-box').innerHTML = obterBadgePagamento(pedido);
+            document.getElementById('oferta-timer-regressivo').innerText = `⏱️ ${segundosRestantesOferta}s`;
+            
+            document.getElementById('modal-oferta-corrida').classList.remove('hidden');
+            
+            tocarAlertaSonoro('motoboy');
+
+            if (timerOfertaInterval) clearInterval(timerOfertaInterval);
+            timerOfertaInterval = setInterval(() => {
+                segundosRestantesOferta--;
+                document.getElementById('oferta-timer-regressivo').innerText = `⏱️ ${segundosRestantesOferta}s`;
+                if (segundosRestantesOferta <= 0) {
+                    recusarCorridaMotoboy(true);
+                }
+            }, 1000);
+        }
+
+        function aceitarCorridaMotoboy() {
+            pararAlarmeMotoboy();
+            if (timerOfertaInterval) clearInterval(timerOfertaInterval);
+            document.getElementById('modal-oferta-corrida').classList.add('hidden');
+            
+            if (corridaOfertadaAtual) {
+                mostrarToast('Corrida Aceita!', 'GPS e rotas liberados no painel.');
+                corridaOfertadaAtual = null;
+            }
+        }
+
+        function recusarCorridaMotoboy(porTempo = false) {
+            pararAlarmeMotoboy();
+            if (timerOfertaInterval) clearInterval(timerOfertaInterval);
+            document.getElementById('modal-oferta-corrida').classList.add('hidden');
+
+            if (corridaOfertadaAtual) {
+                const idRecusado = corridaOfertadaAtual.id;
+                pedidos = pedidos.map(p => {
+                    if (p.id === idRecusado) {
+                        return { ...p, status: 'preparo' };
+                    }
+                    return p;
+                });
+                localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
+                renderizarKDS();
+                if (abaAtiva === 'motoboy') renderizarVisaoMotoboy();
+                mostrarToast(porTempo ? 'Tempo Esgotado' : 'Corrida Recusada', 'A comanda retornou para a cozinha.', true);
+                corridaOfertadaAtual = null;
+            }
+        }
+
         let abaAtiva = 'kds';
         let pedidos = JSON.parse(localStorage.getItem('marmita_certa_pedidos')) || [
             {
@@ -697,7 +834,6 @@
 
         let insumos = JSON.parse(localStorage.getItem('marmita_certa_insumos')) || [];
 
-        // NAVEGAÇÃO
         function navegarPara(tabId) {
             abaAtiva = tabId;
             document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
@@ -735,7 +871,6 @@
             };
         }
 
-        // TEXTO FORMATADO DE PAGAMENTO
         function obterBadgePagamento(p) {
             if (p.formaPagamento === 'pix_pago') {
                 return `<span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 font-extrabold px-2 py-0.5 rounded-md text-[10px]"><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>PIX JÁ PAGO</span>`;
@@ -749,7 +884,6 @@
             }
         }
 
-        // GERA LINK / MENSAGEM WHATSAPP PARA O MOTOBOY
         function enviarRotaWhatsAppMotoboy(id) {
             const p = pedidos.find(item => item.id === id);
             if (!p) return;
@@ -768,35 +902,22 @@
 
             const rotaUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.endereco)}`;
 
-            let msg = `🛵 *NOVA CORRIDA • MARMITA CERTA*
-`;
-            msg += `----------------------------------------
-`;
-            msg += `📦 *Pedido:* #${p.id} (${p.cliente})
-`;
-            msg += `📍 *Endereço:* ${p.endereco}
-`;
-            msg += `🍲 *Itens:* ${p.itens}
-`;
-            msg += `💵 *SEU GANHO NESTA CORRIDA:* R$ ${p.taxaMotoboy.toFixed(2).replace('.', ',')}
-`;
-            msg += `----------------------------------------
-`;
-            msg += `👉 *COMO RECEBER:*
-*${textoCobranca}*
-`;
-            msg += `----------------------------------------
-`;
-            msg += `🗺️ *Abrir GPS / Google Maps:*
-${rotaUrl}
-
-`;
+            let msg = `🛵 *NOVA CORRIDA • MARMITA CERTA*\n`;
+            msg += `----------------------------------------\n`;
+            msg += `📦 *Pedido:* #${p.id} (${p.cliente})\n`;
+            msg += `📍 *Endereço:* ${p.endereco}\n`;
+            msg += `📞 *Tel/Zap Cliente:* ${p.telefone || 'Não informado'}\n`;
+            msg += `🍲 *Itens:* ${p.itens}\n`;
+            msg += `💵 *SEU GANHO NESTA CORRIDA:* R$ ${p.taxaMotoboy.toFixed(2).replace('.', ',')}\n`;
+            msg += `----------------------------------------\n`;
+            msg += `👉 *COMO RECEBER:*\n*${textoCobranca}*\n`;
+            msg += `----------------------------------------\n`;
+            msg += `🗺️ *Abrir GPS / Google Maps:*\n${rotaUrl}\n\n`;
             msg += `_Favor confirmar no sistema ou responder aqui ao entregar!_`;
 
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // KDS RENDERER
         function renderizarKDS() {
             const cols = {
                 pendente: document.getElementById('col-pendente'),
@@ -845,7 +966,6 @@ ${rotaUrl}
                         <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 truncate"><i class="fa-solid fa-location-dot text-brandOrange mr-1"></i>${p.endereco}</p>
                     </div>
 
-                    <!-- Badge de Cobrança em Destaque -->
                     <div>${obterBadgePagamento(p)}</div>
 
                     <div class="pt-2 border-t border-gray-100 dark:border-brandDarkBorder flex items-center justify-between">
@@ -895,7 +1015,8 @@ ${rotaUrl}
             localStorage.setItem('marmita_certa_pedidos', JSON.stringify(pedidos));
             
             if (novoStatus === 'entrega') {
-                tocarAlertaSonoro('motoboy');
+                const pDespachado = pedidos.find(item => item.id === id);
+                if (pDespachado) dispararOfertaMotoboy(pDespachado);
             } else {
                 tocarAlertaSonoro('pedido');
             }
@@ -907,7 +1028,7 @@ ${rotaUrl}
             mostrarToast('Status Atualizado!', `Pedido movido para "${novoStatus.toUpperCase()}".`);
         }
 
-        // VISÃO DO MOTOBOY
+        // VISÃO DO MOTOBOY COM CONTATO DIRETO & REPASSE 72H
         function renderizarVisaoMotoboy() {
             const container = document.getElementById('motoboy-lista-pedidos');
             const contadorP = document.getElementById('motoboy-contador-pendentes');
@@ -924,55 +1045,79 @@ ${rotaUrl}
                         <p class="text-xs text-gray-400 mt-1">Aguarde novos pedidos serem despachados pela cozinha.</p>
                     </div>
                 `;
-                return;
+            } else {
+                emRota.forEach(p => {
+                    const timer = formatarTimer(p.criadoEm);
+                    const wazeUrl = `https://waze.com/ul?q=${encodeURIComponent(p.endereco)}`;
+                    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.endereco)}`;
+                    const telLimpo = p.telefone ? p.telefone.replace(/\D/g, '') : '';
+                    const zapClienteUrl = telLimpo ? `https://wa.me/55${telLimpo}?text=Ol%C3%A1!%20Sou%20o%20entregador%20do%20Marmita%20Certa,%20estou%20a%20caminho%20com%20o%20seu%20pedido!` : '#';
+
+                    let detalheCobrancaBox = '';
+                    if (p.formaPagamento === 'pix_pago') {
+                        detalheCobrancaBox = `<div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 font-extrabold text-xs">🟢 PIX JÁ PAGO: NÃO COBRAR DO CLIENTE!</div>`;
+                    } else if (p.formaPagamento === 'pix_pendente') {
+                        detalheCobrancaBox = `<div class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 font-extrabold text-xs">🟡 COBRAR R$ ${p.valor.toFixed(2).replace('.', ',')} NO PIX (Conferir comprovante na entrega)</div>`;
+                    } else if (p.formaPagamento === 'cartao') {
+                        detalheCobrancaBox = `<div class="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300 font-extrabold text-xs">💳 LEVAR MAQUININHA: Cobrar R$ ${p.valor.toFixed(2).replace('.', ',')} no Cartão</div>`;
+                    } else {
+                        const troco = p.trocoPara > p.valor ? ` (Levar R$ ${(p.trocoPara - p.valor).toFixed(2).replace('.', ',')} de troco)` : '';
+                        detalheCobrancaBox = `<div class="p-3 bg-orange-50 dark:bg-orange-950/40 rounded-xl border border-orange-200 dark:border-orange-800 text-orange-900 dark:text-orange-200 font-extrabold text-xs">💵 COBRAR R$ ${p.valor.toFixed(2).replace('.', ',')} EM DINHEIRO${troco}</div>`;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = "bg-white dark:bg-brandDarkCard rounded-2xl p-5 border-2 border-brandOrange shadow-md space-y-3";
+                    card.innerHTML = `
+                        <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-brandDarkBorder">
+                            <span class="font-black text-sm text-brandOrange">Pedido #${p.id}</span>
+                            <span class="text-xs font-bold text-gray-500"><i class="fa-regular fa-clock mr-1"></i>${timer.texto}</span>
+                        </div>
+                        
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <h4 class="font-black text-base text-brandCharcoal dark:text-white">${p.cliente}</h4>
+                                <p class="text-xs font-bold text-gray-700 dark:text-gray-200">${p.itens}</p>
+                            </div>
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                ${telLimpo ? `
+                                    <a href="tel:${telLimpo}" class="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs hover:bg-blue-100 transition" title="Ligar para o Cliente">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </a>
+                                    <a href="${zapClienteUrl}" target="_blank" class="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs hover:bg-emerald-100 transition" title="Mandar Zap para o Cliente">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </a>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-xl text-xs space-y-1.5">
+                            <p class="font-bold text-gray-800 dark:text-gray-200 flex items-center gap-1.5">
+                                <i class="fa-solid fa-phone text-brandOrange"></i>
+                                <span>Tel/Zap: <strong class="text-brandCharcoal dark:text-white">${p.telefone || 'Não informado'}</strong></span>
+                            </p>
+                            <p class="font-bold text-gray-800 dark:text-gray-200 flex items-start gap-1.5">
+                                <i class="fa-solid fa-map-pin text-brandOrange mt-0.5"></i>
+                                <span>${p.endereco}</span>
+                            </p>
+                            <p class="font-black text-brandOrange pt-0.5">Seu Ganho nesta corrida: R$ ${p.taxaMotoboy.toFixed(2).replace('.', ',')}</p>
+                        </div>
+
+                        ${detalheCobrancaBox}
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="${wazeUrl}" target="_blank" class="text-center bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 rounded-xl text-xs btn-press flex items-center justify-center gap-1"><i class="fa-brands fa-waze"></i> Waze</a>
+                            <a href="${mapsUrl}" target="_blank" class="text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-xl text-xs btn-press flex items-center justify-center gap-1"><i class="fa-solid fa-map-location-dot"></i> Maps</a>
+                        </div>
+                        <button onclick="mudarStatusPedido(${p.id}, 'finalizado')" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl text-sm shadow-md shadow-emerald-500/20 btn-press flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-check text-base"></i> ✅ CONFIRMAR ENTREGA REALIZADA
+                        </button>
+                    `;
+                    container.appendChild(card);
+                });
             }
 
-            emRota.forEach(p => {
-                const timer = formatarTimer(p.criadoEm);
-                const wazeUrl = `https://waze.com/ul?q=${encodeURIComponent(p.endereco)}`;
-                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.endereco)}`;
-
-                let detalheCobrancaBox = '';
-                if (p.formaPagamento === 'pix_pago') {
-                    detalheCobrancaBox = `<div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 font-extrabold text-xs">🟢 PIX JÁ PAGO: NÃO COBRAR DO CLIENTE!</div>`;
-                } else if (p.formaPagamento === 'pix_pendente') {
-                    detalheCobrancaBox = `<div class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 font-extrabold text-xs">🟡 COBRAR R$ ${p.valor.toFixed(2).replace('.', ',')} NO PIX (Conferir comprovante na entrega)</div>`;
-                } else if (p.formaPagamento === 'cartao') {
-                    detalheCobrancaBox = `<div class="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300 font-extrabold text-xs">💳 LEVAR MAQUININHA: Cobrar R$ ${p.valor.toFixed(2).replace('.', ',')} no Cartão</div>`;
-                } else {
-                    const troco = p.trocoPara > p.valor ? ` (Levar R$ ${(p.trocoPara - p.valor).toFixed(2).replace('.', ',')} de troco)` : '';
-                    detalheCobrancaBox = `<div class="p-3 bg-orange-50 dark:bg-orange-950/40 rounded-xl border border-orange-200 dark:border-orange-800 text-orange-900 dark:text-orange-200 font-extrabold text-xs">💵 COBRAR R$ ${p.valor.toFixed(2).replace('.', ',')} EM DINHEIRO${troco}</div>`;
-                }
-
-                const card = document.createElement('div');
-                card.className = "bg-white dark:bg-brandDarkCard rounded-2xl p-5 border-2 border-brandOrange shadow-md space-y-3";
-                card.innerHTML = `
-                    <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-brandDarkBorder">
-                        <span class="font-black text-sm text-brandOrange">Pedido #${p.id}</span>
-                        <span class="text-xs font-bold text-gray-500"><i class="fa-regular fa-clock mr-1"></i>${timer.texto}</span>
-                    </div>
-                    <div>
-                        <h4 class="font-black text-base text-brandCharcoal dark:text-white">${p.cliente}</h4>
-                        <p class="text-xs font-bold text-gray-700 dark:text-gray-200">${p.itens}</p>
-                    </div>
-
-                    <div class="p-3 bg-gray-50 dark:bg-brandCharcoal rounded-xl text-xs space-y-1">
-                        <p class="font-bold text-gray-800 dark:text-gray-200 flex items-start gap-1.5"><i class="fa-solid fa-map-pin text-brandOrange mt-0.5"></i> ${p.endereco}</p>
-                        <p class="font-black text-brandOrange">Seu Ganho nesta corrida: R$ ${p.taxaMotoboy.toFixed(2).replace('.', ',')}</p>
-                    </div>
-
-                    ${detalheCobrancaBox}
-
-                    <div class="grid grid-cols-2 gap-2">
-                        <a href="${wazeUrl}" target="_blank" class="text-center bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 rounded-xl text-xs btn-press"><i class="fa-brands fa-waze"></i> Waze</a>
-                        <a href="${mapsUrl}" target="_blank" class="text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-xl text-xs btn-press"><i class="fa-solid fa-map-location-dot"></i> Maps</a>
-                    </div>
-                    <button onclick="mudarStatusPedido(${p.id}, 'finalizado')" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl text-sm shadow-md shadow-emerald-500/20 btn-press flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-circle-check text-base"></i> ✅ CONFIRMAR ENTREGA REALIZADA
-                    </button>
-                `;
-                container.appendChild(card);
-            });
+            // Atualiza cálculos de 72h
+            calcularFechamento();
         }
 
         // HISTÓRICO
@@ -1099,7 +1244,6 @@ ${rotaUrl}
             mostrarToast('Novo Pedido Zap!', `Cliente ${novo.cliente} - Marmita ${tam}`);
         }
 
-        // FICHA TÉCNICA
         function calcularFichas() {
             const taxa = parseFloat(document.getElementById('taxa-fixa-select').value);
             const pComida = 0.64 + 0.63 + 4.20; const pEmb = 0.70; const pFixo = (pComida + pEmb) * taxa; const pTotal = pComida + pEmb + pFixo;
@@ -1118,12 +1262,21 @@ ${rotaUrl}
             document.getElementById('g-lucro-liquido').innerText = `R$ ${(30.00 - gTotal).toFixed(2).replace('.', ',')}`;
         }
 
-        // FECHAMENTO
+        // FECHAMENTO & REPASSE 72 HORAS
         function calcularFechamento() {
-            const entregues = pedidos.filter(p => p.status === 'finalizado');
-            const totalFaturado = entregues.reduce((acc, curr) => acc + curr.valor, 0);
+            const agora = Date.now();
+            const limite72h = agora - (72 * 60 * 60 * 1000);
+            const inicioHoje = new Date();
+            inicioHoje.setHours(0, 0, 0, 0);
+
+            const entreguesTodos = pedidos.filter(p => p.status === 'finalizado');
+            const entreguesHoje = entreguesTodos.filter(p => (p.finalizadoEm || p.criadoEm) >= inicioHoje.getTime());
+            const entregues72h = entreguesTodos.filter(p => (p.finalizadoEm || p.criadoEm) >= limite72h);
+
+            // Cálculos Hoje
+            const totalFaturado = entreguesHoje.reduce((acc, curr) => acc + curr.valor, 0);
             let custoTotalProducao = 0;
-            entregues.forEach(p => {
+            entreguesHoje.forEach(p => {
                 if (p.tamanho === 'P') custoTotalProducao += 7.09;
                 else if (p.tamanho === 'G') custoTotalProducao += 16.80;
                 else custoTotalProducao += 12.01;
@@ -1133,42 +1286,62 @@ ${rotaUrl}
             const margem = totalFaturado > 0 ? (lucroLiquido / totalFaturado) * 100 : 0;
 
             document.getElementById('fechamento-faturamento').innerText = `R$ ${totalFaturado.toFixed(2).replace('.', ',')}`;
-            document.getElementById('fechamento-total-marmitas').innerText = `${entregues.length} marmitas entregues hoje`;
+            document.getElementById('fechamento-total-marmitas').innerText = `${entreguesHoje.length} marmitas entregues hoje`;
             document.getElementById('fechamento-custo-producao').innerText = `R$ ${custoTotalProducao.toFixed(2).replace('.', ',')}`;
             document.getElementById('fechamento-lucro-liquido').innerText = `R$ ${lucroLiquido.toFixed(2).replace('.', ',')}`;
             document.getElementById('fechamento-margem-media').innerText = `Margem Média: ${margem.toFixed(1)}%`;
 
             const diaria = parseFloat(document.getElementById('motoboy-diaria-input').value) || 0;
-            const totalTaxasCorridas = entregues.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
-            const totalServicoMotoboy = diaria + totalTaxasCorridas;
-            
-            // Apenas pedidos pagos em dinheiro entram na soma do dinheiro de rua
-            const dinheiroRecebidoRua = entregues.filter(p => p.formaPagamento === 'dinheiro').reduce((acc, curr) => acc + curr.valor, 0);
+            const totalTaxasHoje = entreguesHoje.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
+            const totalServicoHoje = diaria + totalTaxasHoje;
+            const dinheiroRecebidoRuaHoje = entreguesHoje.filter(p => p.formaPagamento === 'dinheiro').reduce((acc, curr) => acc + curr.valor, 0);
 
-            document.getElementById('motoboy-taxas-acumuladas').innerText = `R$ ${totalTaxasCorridas.toFixed(2).replace('.', ',')}`;
-            document.getElementById('motoboy-qtd-corridas').innerText = `${entregues.length} corridas`;
-            document.getElementById('motoboy-valor-servico').innerText = `R$ ${totalServicoMotoboy.toFixed(2).replace('.', ',')}`;
-            document.getElementById('motoboy-dinheiro-rua').innerText = `R$ ${dinheiroRecebidoRua.toFixed(2).replace('.', ',')}`;
+            document.getElementById('motoboy-taxas-acumuladas').innerText = `R$ ${totalTaxasHoje.toFixed(2).replace('.', ',')}`;
+            document.getElementById('motoboy-qtd-corridas').innerText = `${entreguesHoje.length} corridas`;
+            document.getElementById('motoboy-valor-servico').innerText = `R$ ${totalServicoHoje.toFixed(2).replace('.', ',')}`;
+            document.getElementById('motoboy-dinheiro-rua').innerText = `R$ ${dinheiroRecebidoRuaHoje.toFixed(2).replace('.', ',')}`;
+
+            // Cálculos Repasse 72 Horas
+            const totalTaxas72h = entregues72h.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
+            const totalDiarias72h = diaria * 3;
+            const totalRepasseGeral72h = totalDiarias72h + totalTaxas72h;
+
+            const elemGanho72h = document.getElementById('motoboy-ganho-72h');
+            const elemQtd72h = document.getElementById('motoboy-qtd-72h');
+            const elemTaxas72h = document.getElementById('motoboy-taxas-72h');
+            if (elemGanho72h) elemGanho72h.innerText = `R$ ${totalTaxas72h.toFixed(2).replace('.', ',')}`;
+            if (elemQtd72h) elemQtd72h.innerText = `${entregues72h.length} entregas`;
+            if (elemTaxas72h) elemTaxas72h.innerText = `R$ ${totalTaxas72h.toFixed(2).replace('.', ',')}`;
+
+            const elemRepQtd = document.getElementById('repasse-72h-qtd-corridas');
+            const elemRepTaxas = document.getElementById('repasse-72h-taxas');
+            const elemRepDiarias = document.getElementById('repasse-72h-diarias');
+            const elemRepTotal = document.getElementById('repasse-72h-total-geral');
+            if (elemRepQtd) elemRepQtd.innerText = `${entregues72h.length} entregas`;
+            if (elemRepTaxas) elemRepTaxas.innerText = `R$ ${totalTaxas72h.toFixed(2).replace('.', ',')}`;
+            if (elemRepDiarias) elemRepDiarias.innerText = `R$ ${totalDiarias72h.toFixed(2).replace('.', ',')}`;
+            if (elemRepTotal) elemRepTotal.innerText = `R$ ${totalRepasseGeral72h.toFixed(2).replace('.', ',')}`;
         }
 
         function gerarRelatorioFechamentoZap() {
-            const entregues = pedidos.filter(p => p.status === 'finalizado');
+            const inicioHoje = new Date();
+            inicioHoje.setHours(0, 0, 0, 0);
+            const entreguesHoje = pedidos.filter(p => p.status === 'finalizado' && (p.finalizadoEm || p.criadoEm) >= inicioHoje.getTime());
+            
             const diaria = parseFloat(document.getElementById('motoboy-diaria-input').value) || 0;
-            const totalTaxas = entregues.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
+            const totalTaxas = entreguesHoje.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
             const totalServico = diaria + totalTaxas;
-            const dinheiroRua = entregues.filter(p => p.formaPagamento === 'dinheiro').reduce((acc, curr) => acc + curr.valor, 0);
+            const dinheiroRua = entreguesHoje.filter(p => p.formaPagamento === 'dinheiro').reduce((acc, curr) => acc + curr.valor, 0);
             const saldoAcerto = dinheiroRua - totalServico;
 
-            let msg = `*🏍️ MARMITA CERTA - FECHAMENTO DO ENTREGADOR*
-📅 Data: ${new Date().toLocaleDateString('pt-BR')}
-----------------------------------------
-• Diária Fixa: R$ ${diaria.toFixed(2).replace('.', ',')}
-• Taxas de Corridas (${entregues.length}): R$ ${totalTaxas.toFixed(2).replace('.', ',')}
-💰 *Total Ganho pelo Serviço:* R$ ${totalServico.toFixed(2).replace('.', ',')}
-
-💵 *Dinheiro recebido em mãos (Rua):* R$ ${dinheiroRua.toFixed(2).replace('.', ',')}
-----------------------------------------
-`;
+            let msg = `*🏍️ MARMITA CERTA - FECHAMENTO DIÁRIO DO ENTREGADOR*\n`;
+            msg += `📅 Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
+            msg += `----------------------------------------\n`;
+            msg += `• Diária Fixa (Hoje): R$ ${diaria.toFixed(2).replace('.', ',')}\n`;
+            msg += `• Taxas de Corridas (${entreguesHoje.length}): R$ ${totalTaxas.toFixed(2).replace('.', ',')}\n`;
+            msg += `💰 *Total Ganho pelo Serviço:* R$ ${totalServico.toFixed(2).replace('.', ',')}\n\n`;
+            msg += `💵 *Dinheiro recebido em mãos (Rua):* R$ ${dinheiroRua.toFixed(2).replace('.', ',')}\n`;
+            msg += `----------------------------------------\n`;
             if (saldoAcerto > 0) {
                 msg += `👉 *Acerto:* O motoboy repassa *R$ ${saldoAcerto.toFixed(2).replace('.', ',')}* para a cozinha.`;
             } else {
@@ -1177,7 +1350,31 @@ ${rotaUrl}
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // EXCLUSÃO
+        function gerarExtratoRepasse72hZap() {
+            const agora = Date.now();
+            const limite72h = agora - (72 * 60 * 60 * 1000);
+            const entregues72h = pedidos.filter(p => p.status === 'finalizado' && (p.finalizadoEm || p.criadoEm) >= limite72h);
+            const diaria = parseFloat(document.getElementById('motoboy-diaria-input').value) || 0;
+            const totalTaxas = entregues72h.reduce((acc, curr) => acc + (curr.taxaMotoboy || 5.00), 0);
+            const totalDiarias = diaria * 3;
+            const totalGeral = totalDiarias + totalTaxas;
+
+            let msg = `*📊 MARMITA CERTA - EXTRATO DE REPASSE (CICLO DE 72 HORAS)*\n`;
+            msg += `📅 Período: Últimas 72 Horas (3 Dias)\n`;
+            msg += `📅 Data Emissão: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'})}\n`;
+            msg += `----------------------------------------\n`;
+            msg += `🛵 *Total de Corridas Realizadas:* ${entregues72h.length} entregas\n`;
+            msg += `💵 *Soma das Taxas de Entrega:* R$ ${totalTaxas.toFixed(2).replace('.', ',')}\n`;
+            msg += `💼 *Diárias Acumuladas (3 Dias):* R$ ${totalDiarias.toFixed(2).replace('.', ',')}\n`;
+            msg += `----------------------------------------\n`;
+            msg += `💰 *VALOR TOTAL DO REPASSE A PAGAR:*\n`;
+            msg += `👉 *R$ ${totalGeral.toFixed(2).replace('.', ',')}*\n`;
+            msg += `----------------------------------------\n`;
+            msg += `_Comprovante gerado automaticamente pela plataforma Marmita Certa._`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
         function excluirPedido(id) {
             if (confirm(`Deseja realmente excluir a comanda #${id}?`)) {
                 pedidos = pedidos.filter(item => item.id !== id);
@@ -1213,7 +1410,6 @@ ${rotaUrl}
             }
         }
 
-        // INSUMOS
         function previewUnitario() {
             const qtd = parseFloat(document.getElementById('insumo-qtd').value);
             const preco = parseFloat(document.getElementById('insumo-preco').value);
@@ -1281,7 +1477,6 @@ ${rotaUrl}
             renderizarTabelaInsumos();
         }
 
-        // DARK MODE & TOAST
         function alternarModoEscuro() {
             const isDark = document.documentElement.classList.toggle('dark');
             document.documentElement.classList.toggle('light', !isDark);
@@ -1312,13 +1507,11 @@ ${rotaUrl}
             }, 3000);
         }
 
-        // TIMERS INTERVAL
         setInterval(() => {
             if (abaAtiva === 'kds') renderizarKDS();
             if (abaAtiva === 'motoboy') renderizarVisaoMotoboy();
         }, 1000);
 
-        // INIT
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('marmita_certa_theme');
             if (savedTheme === 'dark') {
@@ -1329,5 +1522,46 @@ ${rotaUrl}
             renderizarKDS();
         });
     </script>
+
+    <!-- MODAL DE OFERTA DE CORRIDA PARA O MOTOBOY (ESTILO IFOOD / UBER) -->
+    <div id="modal-oferta-corrida" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-brandDarkCard rounded-3xl max-w-sm w-full p-6 shadow-2xl border-4 border-brandOrange text-center space-y-4 animate-bounce-short">
+            
+            <div class="flex items-center justify-between pb-2 border-b border-gray-100 dark:border-brandDarkBorder">
+                <span class="bg-orange-100 text-brandOrange dark:bg-orange-950/60 dark:text-orange-300 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
+                    🛵 Nova Corrida Disponível!
+                </span>
+                <span id="oferta-timer-regressivo" class="text-sm font-black text-red-500 bg-red-50 dark:bg-red-950/40 px-2.5 py-1 rounded-full">
+                    ⏱️ 45s
+                </span>
+            </div>
+
+            <div>
+                <span class="text-[11px] font-bold text-gray-400 uppercase">Seu Ganho Nesta Corrida</span>
+                <h3 id="oferta-taxa-valor" class="text-3xl font-black text-brandOrange mt-0.5">R$ 5,00</h3>
+            </div>
+
+            <div class="p-3.5 bg-gray-50 dark:bg-brandCharcoal rounded-2xl text-left space-y-1.5 text-xs">
+                <p class="font-black text-brandCharcoal dark:text-white flex items-start gap-1.5">
+                    <i class="fa-solid fa-location-dot text-brandOrange mt-0.5"></i>
+                    <span id="oferta-endereco">Av. Pres. Kennedy, 1400</span>
+                </p>
+                <p class="text-gray-500 dark:text-gray-400 font-semibold" id="oferta-itens">1x Marmita M</p>
+                <div id="oferta-pagamento-box" class="pt-1"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-2">
+                <button onclick="recusarCorridaMotoboy()" class="py-3.5 px-4 rounded-2xl bg-gray-100 hover:bg-gray-200 dark:bg-brandDarkBorder text-gray-700 dark:text-gray-200 font-black text-xs btn-press transition">
+                    ❌ Recusar
+                </button>
+                <button onclick="aceitarCorridaMotoboy()" class="py-3.5 px-4 rounded-2xl bg-brandGreen hover:bg-emerald-700 text-white font-black text-xs btn-press shadow-lg shadow-emerald-500/30 transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-check text-sm"></i> Aceitar Corrida
+                </button>
+            </div>
+            
+            <p class="text-[10px] text-gray-400">O alarme tocará continuamente até que você responda.</p>
+        </div>
+    </div>
+
 </body>
 </html>
